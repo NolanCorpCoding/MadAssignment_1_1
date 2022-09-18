@@ -8,7 +8,7 @@ import java.util.List;
 public class RestaurantList {
 
     private List<Restaurant> restaurantList = Arrays.asList(new Restaurant[]{
-            new Restaurant(R.drawable.dominos, "Dominos"),
+            new Restaurant(R.drawable.dominos, "Dominos", ),
             new Restaurant(R.drawable.kfc, "KFC"),
             new Restaurant(R.drawable.maccas, "McDonalds"),
     });
