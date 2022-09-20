@@ -6,9 +6,7 @@ import com.example.madassignment_1_1.Account.UserAccountDBSchema.UserAccountTabl
 
 public class UserAccountDBCursor extends CursorWrapper
 {
-    public UserAccountDBCursor(Cursor cursor) {
-        super(cursor);
-    }
+    public UserAccountDBCursor(Cursor cursor) { super(cursor); }
 
     public UserAccount getFaction(){
         int id = getInt(getColumnIndex(UserAccountTable.Cols.ID));
