@@ -60,6 +60,25 @@ public class RestaurantDBModel
         return  restaurantList;
     }
 
+    public int getNumTuples()
+    {
+        int tableSize = 0;
+        Cursor cursor = database.query(RestaurantTable.NAME,null,null,null,null,null,null);
+        RestaurantDBCursor restaurantDBCursor = new RestaurantDBCursor(cursor);
+
+        try{
+            restaurantDBCursor.moveToFirst();
+            while(!restaurantDBCursor.isAfterLast()){
+                tableSize++;
+                restaurantDBCursor.moveToNext();
+            }
+        }
+        finally {
+            cursor.close();
+        }
+        return tableSize;
+    }
+
 
 
 
