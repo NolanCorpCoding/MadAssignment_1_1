@@ -1,6 +1,7 @@
 package com.example.madassignment_1_1.Restaurants;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.madassignment_1_1.R;
 
@@ -27,10 +28,15 @@ public class RestaurantList {
 
     public void load(Context context)
     {
+        Log.d("DEBUG", "RUNNING LOAD() Method.");
+
         restaurants = new ArrayList<>();
 
         restaurantDBModel = new RestaurantDBModel();
         restaurantDBModel.load(context);
+
+        Log.d("DEBUG", "RUNNING MIDDLE OF LOAD() Method and so the restaurantDBModel.getNumTuples() == " + restaurantDBModel.getNumTuples() +  ".");
+
 
         restaurants = restaurantDBModel.getAllRestaurants();
 
@@ -38,13 +44,15 @@ public class RestaurantList {
         {
             addRestaurants();
         }
+        Log.d("DEBUG", "RUNNING FINISHED FOR THE LOAD() Metho dand so the restaurantDBModel.getNumTuples() == " + restaurantDBModel.getNumTuples() +  ".");
+
     }
 
     private void addRestaurants()
     {
-        restaurantDBModel.addRestaurant(new Restaurant("Dominos", "Address 1", R.drawable.dominos));
-        restaurantDBModel.addRestaurant(new Restaurant("KFC", "Address 2", R.drawable.dominos));
-        restaurantDBModel.addRestaurant(new Restaurant("McDonalds", "Address 3", R.drawable.maccas));
+        restaurantDBModel.addRestaurant(new Restaurant("Dominos", "410/412 Albany Hwy, Victoria Park WA 6100", R.drawable.dominos));
+        restaurantDBModel.addRestaurant(new Restaurant("KFC", "252 Abernethy Rd, Belmont WA 6104", R.drawable.dominos));
+        restaurantDBModel.addRestaurant(new Restaurant("McDonalds", "224 Manning Rd, Karawara WA 6152", R.drawable.maccas));
     }
 
 

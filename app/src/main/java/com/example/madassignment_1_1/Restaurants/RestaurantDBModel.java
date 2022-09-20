@@ -17,6 +17,9 @@ public class RestaurantDBModel
     public void load(Context context)
     {
         this.database = new RestaurantDBHelper(context).getWritableDatabase();
+//        new RestaurantDBHelper(context).deleteTable(database);
+//        new RestaurantDBHelper(context).onCreate(database);
+
     }
 
     public void addRestaurant(Restaurant pRestaurant)
