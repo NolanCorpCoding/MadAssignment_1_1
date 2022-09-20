@@ -8,9 +8,9 @@ import java.util.List;
 public class RestaurantList {
 
     private List<Restaurant> restaurantList = Arrays.asList(new Restaurant[]{
-            new Restaurant(R.drawable.dominos, "Dominos"),
-            new Restaurant(R.drawable.kfc, "KFC"),
-            new Restaurant(R.drawable.maccas, "McDonalds"),
+            new Restaurant("Dominos", "Address 1", R.drawable.dominos),
+            new Restaurant("KFC", "Address 2", R.drawable.dominos),
+            new Restaurant("McDonalds", "Address 2", R.drawable.maccas)
     });
 
     private static RestaurantList instance = null;
