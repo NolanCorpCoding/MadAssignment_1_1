@@ -3,7 +3,6 @@ package com.example.madassignment_1_1.Account;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +10,12 @@ import android.view.ViewGroup;
 
 import com.example.madassignment_1_1.R;
 
-
-public class AccountFrag extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link AccountMainPage#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class AccountMainPage extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,7 +26,7 @@ public class AccountFrag extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AccountFrag() {
+    public AccountMainPage() {
         // Required empty public constructor
     }
 
@@ -33,11 +36,11 @@ public class AccountFrag extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AccountFrag.
+     * @return A new instance of fragment AccountMainPage.
      */
     // TODO: Rename and change types and number of parameters
-    public static AccountFrag newInstance(String param1, String param2) {
-        AccountFrag fragment = new AccountFrag();
+    public static AccountMainPage newInstance(String param1, String param2) {
+        AccountMainPage fragment = new AccountMainPage();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -55,16 +58,9 @@ public class AccountFrag extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        Fragment childFragment = new AccountCreateFrag();
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.subMenu_frag_container, childFragment).commit();
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.parent_fragment_account, container, false);
+        return inflater.inflate(R.layout.fragment_account_main_page, container, false);
     }
 }
