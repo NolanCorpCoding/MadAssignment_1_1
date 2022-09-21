@@ -10,15 +10,15 @@ import java.util.List;
 public class MealsList {
 
     private List<Meal> mealsList = Arrays.asList(new Meal[]{
-            new Meal(R.drawable.dominos, "Dominos"),
-            new Meal(R.drawable.kfc, "KFC"),
-            new Meal(R.drawable.maccas, "McDonalds"),
+            new Meal(R.drawable.dominos, "Dominos", 12.0),
+            new Meal(R.drawable.kfc, "KFC", 10.0),
+            new Meal(R.drawable.maccas, "McDonalds", 12.5),
     });
 
 
-    private static RestaurantList instance = null;
+    private static MealsList instance = null;
 
-    public static RestaurantList get()
+    public static MealsList get()
     {
         if(instance == null)
         {
@@ -39,7 +39,7 @@ public class MealsList {
         return mealsList.size();
     }
 
-    public void add(Restaurant s)
+    public void add(Meal s)
     {
         mealsList.add(0, s);
     }
