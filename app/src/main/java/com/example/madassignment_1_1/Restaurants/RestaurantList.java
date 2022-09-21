@@ -29,9 +29,9 @@ public class RestaurantList {
         }
         else
         {
-            restaurantDBModel.getID("Dominos");
-            restaurantDBModel.getID("KFC");
-            restaurantDBModel.getID("McDonald");
+            restaurantDBModel.getId("Dominos");
+            restaurantDBModel.getId("KFC");
+            restaurantDBModel.getId("McDonalds");
         }
     }
 

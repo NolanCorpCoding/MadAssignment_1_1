@@ -10,6 +10,7 @@ import android.util.Log;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+
 import com.example.madassignment_1_1.Restaurants.RestaurantDBSchema.RestaurantTable;
 
 public class RestaurantDBModel
@@ -85,14 +86,20 @@ public class RestaurantDBModel
         return tableSize;
     }
 
-    public int getID(String restaurantName)
+    public int getId(String restaurantName)
     {
-        Cursor cursor = database.query(RestaurantTable.NAME,new String[] {RestaurantTable.Cols.ID},RestaurantTable.Cols.NAME + " = ?",new String[] {restaurantName},null,null,null);
+        Restaurant tempRestaurant = new Restaurant(null, null,  0);
+        int restaurantID = -1;
+
+//        Cursor cursor = database.query(RestaurantTable.NAME, new String[] {RestaurantTable.Cols.ID},RestaurantTable.Cols.NAME + " = ?",new String[] {restaurantName},null,null,null);
+        Cursor cursor = database.query(RestaurantTable.NAME, null,RestaurantTable.Cols.NAME + " = ?",new String[] {restaurantName},null,null,null);
         RestaurantDBCursor restaurantDBCursor = new RestaurantDBCursor(cursor);
 
         try{
             restaurantDBCursor.moveToFirst();
-            Log.d("WHILE LOOP", "ID = " + restaurantDBCursor.getString(0) + " for when the Restaurant = " + restaurantName);
+            tempRestaurant = restaurantDBCursor.getRestaurant();
+            restaurantID = tempRestaurant.getId();
+            Log.d("WHILE LOOP", "ID = " + restaurantID + " for when the Restaurant = " + tempRestaurant.getName());
         }
         catch(CursorIndexOutOfBoundsException e) {
             Log.d("ERROR", "ERROR: " + e.getCause() + " ... " + e.getLocalizedMessage());
@@ -100,13 +107,6 @@ public class RestaurantDBModel
         finally {
             cursor.close();
         }
-        return 0;
+        return restaurantID;
     }
-
-
-
-
-
-
-
 }

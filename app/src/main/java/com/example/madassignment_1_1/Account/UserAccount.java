@@ -2,6 +2,8 @@ package com.example.madassignment_1_1.Account;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class UserAccount
 {
     private static int autoNextId = 0;
@@ -10,6 +12,8 @@ public class UserAccount
     private String firstname;
     private String lastname;
     private String email;
+//    private Cart currentCart;
+//    private ArrayList<Cart> previousCarts;
 
     public UserAccount(int pId, String pFirstname, String pLastname, String pEmail)
     {

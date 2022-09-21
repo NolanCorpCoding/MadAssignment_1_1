@@ -8,7 +8,7 @@ public class UserAccountDBCursor extends CursorWrapper
 {
     public UserAccountDBCursor(Cursor cursor) { super(cursor); }
 
-    public UserAccount getFaction(){
+    public UserAccount getUserAccount(){
         int id = getInt(getColumnIndex(UserAccountTable.Cols.ID));
         String firstname = getString(getColumnIndex(UserAccountTable.Cols.FIRSTNAME));
         String lastname = getString(getColumnIndex(UserAccountTable.Cols.LASTNAME));
