@@ -27,13 +27,19 @@ public class RestaurantList {
         {
             addRestaurants();
         }
+        else
+        {
+            restaurantDBModel.getID("Dominos");
+            restaurantDBModel.getID("KFC");
+            restaurantDBModel.getID("McDonald");
+        }
     }
 
     private void addRestaurants()
     {
-        restaurantDBModel.addRestaurant(new Restaurant("Dominos", "410/412 Albany Hwy, Victoria Park WA 6100", R.drawable.dominos));
-        restaurantDBModel.addRestaurant(new Restaurant("KFC", "252 Abernethy Rd, Belmont WA 6104", R.drawable.kfc));
-        restaurantDBModel.addRestaurant(new Restaurant("McDonalds", "224 Manning Rd, Karawara WA 6152", R.drawable.maccas));
+        restaurantDBModel.addRestaurant(new Restaurant(1, "Dominos", "410/412 Albany Hwy, Victoria Park WA 6100", R.drawable.dominos));
+        restaurantDBModel.addRestaurant(new Restaurant(2, "KFC", "252 Abernethy Rd, Belmont WA 6104", R.drawable.kfc));
+        restaurantDBModel.addRestaurant(new Restaurant(3, "McDonalds", "224 Manning Rd, Karawara WA 6152", R.drawable.maccas));
     }
 
 

@@ -3,7 +3,9 @@ package com.example.madassignment_1_1.Restaurants;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ public class RestaurantDBModel
     public void load(Context context)
     {
         this.database = new RestaurantDBHelper(context).getWritableDatabase();
+//        Log.d("WARNING", "Resetting the database");
 //        new RestaurantDBHelper(context).deleteTable(database);
 //        new RestaurantDBHelper(context).onCreate(database);
 
@@ -81,6 +84,25 @@ public class RestaurantDBModel
         }
         return tableSize;
     }
+
+    public int getID(String restaurantName)
+    {
+        Cursor cursor = database.query(RestaurantTable.NAME,new String[] {RestaurantTable.Cols.ID},RestaurantTable.Cols.NAME + " = ?",new String[] {restaurantName},null,null,null);
+        RestaurantDBCursor restaurantDBCursor = new RestaurantDBCursor(cursor);
+
+        try{
+            restaurantDBCursor.moveToFirst();
+            Log.d("WHILE LOOP", "ID = " + restaurantDBCursor.getString(0) + " for when the Restaurant = " + restaurantName);
+        }
+        catch(CursorIndexOutOfBoundsException e) {
+            Log.d("ERROR", "ERROR: " + e.getCause() + " ... " + e.getLocalizedMessage());
+        }
+        finally {
+            cursor.close();
+        }
+        return 0;
+    }
+
 
 
 
