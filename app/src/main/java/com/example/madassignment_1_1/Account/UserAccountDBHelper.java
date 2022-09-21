@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.example.madassignment_1_1.Account.UserAccountDBSchema.UserAccountTable;
 
-
 public class UserAccountDBHelper extends SQLiteOpenHelper
 {
     private static final int VERSION = 1;
@@ -25,4 +24,11 @@ public class UserAccountDBHelper extends SQLiteOpenHelper
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
+
+    //uncomment RestaurantDBHelper.load() delete and onCreate comments
+    public void deleteTable(SQLiteDatabase sqLiteDatabase)
+    {
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ UserAccountTable.NAME);
+    }
+
 }

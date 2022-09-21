@@ -43,7 +43,7 @@ public class RestaurantList {
     }
 
 
-    protected RestaurantList() {}
+//    protected RestaurantList() {}
 
     public Restaurant get(int i)
     {

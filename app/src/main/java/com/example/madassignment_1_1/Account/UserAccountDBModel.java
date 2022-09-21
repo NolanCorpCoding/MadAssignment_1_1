@@ -18,8 +18,8 @@ public class UserAccountDBModel
     {
         this.database = new UserAccountDBHelper(context).getWritableDatabase();
 //        Log.d("WARNING", "Resetting the database");
-//        new RestaurantDBHelper(context).deleteTable(database);
-//        new RestaurantDBHelper(context).onCreate(database);
+//        new UserAccountDBHelper(context).deleteTable(database);
+//        new UserAccountDBHelper(context).onCreate(database);
 
     }
 
@@ -83,13 +83,13 @@ public class UserAccountDBModel
         return tableSize;
     }
 
-    public int getId(String useraccountName)
+    public int getId(String useraccountFirstName, String useraccountLastName)
     {
         UserAccount tempUserAccount = new UserAccount(null, null,  null);
         int restaurantID = -1;
 
 //        Cursor cursor = database.query(RestaurantTable.NAME, new String[] {RestaurantTable.Cols.ID},RestaurantTable.Cols.NAME + " = ?",new String[] {restaurantName},null,null,null);
-        Cursor cursor = database.query(UserAccountDBSchema.UserAccountTable.NAME, null, UserAccountDBSchema.UserAccountTable.Cols.FIRSTNAME + " = ?" ,new String[] {useraccountName},null,null,null);
+        Cursor cursor = database.query(UserAccountDBSchema.UserAccountTable.NAME, null, UserAccountDBSchema.UserAccountTable.Cols.FIRSTNAME + " = ? AND " + UserAccountDBSchema.UserAccountTable.Cols.LASTNAME + " = ?" ,new String[] {useraccountFirstName, useraccountLastName},null,null,null);
         UserAccountDBCursor useraccountDBCursor = new UserAccountDBCursor(cursor);
 
         try{
