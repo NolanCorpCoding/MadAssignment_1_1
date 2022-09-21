@@ -1,5 +1,12 @@
 package com.example.madassignment_1_1.Restaurants;
 
+import com.example.madassignment_1_1.Meals.Meal;
+import com.example.madassignment_1_1.Meals.MealsList;
+import com.example.madassignment_1_1.R;
+
+import java.util.Arrays;
+import java.util.List;
+
 public class Restaurant {
     public final int id;
     private String name;
@@ -15,6 +22,7 @@ public class Restaurant {
         this.drawableReference = pDrawableReference;
 
         nextId = pId + 1;
+
     }
 
     public Restaurant(String pName, String pAddress, int pDrawableReference){
