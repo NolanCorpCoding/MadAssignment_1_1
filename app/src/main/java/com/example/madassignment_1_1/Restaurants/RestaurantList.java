@@ -1,50 +1,63 @@
 package com.example.madassignment_1_1.Restaurants;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.example.madassignment_1_1.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class RestaurantList {
 
-    private List<Restaurant> restaurantList = Arrays.asList(new Restaurant[]{
-            new Restaurant(R.drawable.dominos, "Dominos", ),
-            new Restaurant(R.drawable.kfc, "KFC"),
-            new Restaurant(R.drawable.maccas, "McDonalds"),
-    });
+    private List<Restaurant> restaurants;
+    RestaurantDBModel restaurantDBModel;
 
-    private static RestaurantList instance = null;
-
-    public static RestaurantList get()
+    public void load(Context context)
     {
-        if(instance == null)
+        restaurants = new ArrayList<>();
+
+        restaurantDBModel = new RestaurantDBModel();
+        restaurantDBModel.load(context);
+
+        restaurants = restaurantDBModel.getAllRestaurants();
+
+        if(restaurantDBModel.getNumTuples() <= 0)
         {
-            instance = new RestaurantList();
+            addRestaurants();
         }
-        return instance;
     }
+
+    private void addRestaurants()
+    {
+        restaurantDBModel.addRestaurant(new Restaurant("Dominos", "410/412 Albany Hwy, Victoria Park WA 6100", R.drawable.dominos));
+        restaurantDBModel.addRestaurant(new Restaurant("KFC", "252 Abernethy Rd, Belmont WA 6104", R.drawable.dominos));
+        restaurantDBModel.addRestaurant(new Restaurant("McDonalds", "224 Manning Rd, Karawara WA 6152", R.drawable.maccas));
+    }
+
 
     protected RestaurantList() {}
 
     public Restaurant get(int i)
     {
-        return restaurantList.get(i);
+        return restaurants.get(i);
     }
 
     public int size()
     {
-        return restaurantList.size();
+        return restaurants.size();
     }
 
-    public void add(Restaurant s)
-    {
-        restaurantList.add(0, s);
-    }
-
-    public void remove(int i)
-    {
-        restaurantList.remove(i);
-    }
+//    public void add(Restaurant s)
+//    {
+//        restaurants.add(0, s);
+//    }
+//
+//    public void remove(int i)
+//    {
+//        restaurants.remove(i);
+//    }
 
 
 }

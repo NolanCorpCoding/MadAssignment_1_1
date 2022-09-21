@@ -47,11 +47,10 @@ public class RestaurantsFrag extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
+        if (getArguments() != null) { }
 
         resList = new RestaurantList();
+        resList.load(getActivity());
     }
 
     @Override
@@ -74,12 +73,14 @@ public class RestaurantsFrag extends Fragment {
 
 
     public class RestaurantViewHolder extends RecyclerView.ViewHolder {
-        TextView text;
+        TextView textName;
+        TextView textAddress;
         ImageView img;
 
         public RestaurantViewHolder(@NonNull View itemView, ViewGroup parent) {
             super(itemView);
-            text = itemView.findViewById(R.id.resName);
+            textName = itemView.findViewById(R.id.resName);
+            textAddress = itemView.findViewById(R.id.resAddr);
             img = itemView.findViewById(R.id.imgResIcon);
 
         }
@@ -109,14 +110,15 @@ public class RestaurantsFrag extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull RestaurantViewHolder holder, int position) {
-            Restaurant restaurant = RestaurantList.get().get(position);
+            Restaurant restaurant = resList.get(position);
             holder.img.setImageResource(restaurant.getDrawableID());
-            holder.text.setText(restaurant.getName());
+            holder.textName.setText(restaurant.getName());
+            holder.textAddress.setText(restaurant.getAddress());
 
             holder.img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "clicked menu item", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "clicked menu item", Toast.LENGTH_SHORT).show(); //doesnt work
                     //Menu.setSelected(structure);
                     //THIS IS WHERE THE "ACTION" HAPPENS
                 }
