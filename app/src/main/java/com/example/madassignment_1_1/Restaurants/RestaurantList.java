@@ -15,28 +15,12 @@ public class RestaurantList {
     private List<Restaurant> restaurants;
     RestaurantDBModel restaurantDBModel;
 
-//    private static RestaurantList instance = null;
-//
-//    public static RestaurantList get()
-//    {
-//        if(instance == null)
-//        {
-//            instance = new RestaurantList();
-//        }
-//        return instance;
-//    }
-
     public void load(Context context)
     {
-        Log.d("DEBUG", "RUNNING LOAD() Method.");
-
         restaurants = new ArrayList<>();
 
         restaurantDBModel = new RestaurantDBModel();
         restaurantDBModel.load(context);
-
-        Log.d("DEBUG", "RUNNING MIDDLE OF LOAD() Method and so the restaurantDBModel.getNumTuples() == " + restaurantDBModel.getNumTuples() +  ".");
-
 
         restaurants = restaurantDBModel.getAllRestaurants();
 
@@ -44,8 +28,6 @@ public class RestaurantList {
         {
             addRestaurants();
         }
-        Log.d("DEBUG", "RUNNING FINISHED FOR THE LOAD() Metho dand so the restaurantDBModel.getNumTuples() == " + restaurantDBModel.getNumTuples() +  ".");
-
     }
 
     private void addRestaurants()
@@ -68,15 +50,15 @@ public class RestaurantList {
         return restaurants.size();
     }
 
-    public void add(Restaurant s)
-    {
-        restaurants.add(0, s);
-    }
-
-    public void remove(int i)
-    {
-        restaurants.remove(i);
-    }
+//    public void add(Restaurant s)
+//    {
+//        restaurants.add(0, s);
+//    }
+//
+//    public void remove(int i)
+//    {
+//        restaurants.remove(i);
+//    }
 
 
 }

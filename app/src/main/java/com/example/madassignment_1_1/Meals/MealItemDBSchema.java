@@ -2,7 +2,7 @@ package com.example.madassignment_1_1.Meals;
 
 public class MealItemDBSchema
 {
-    public static class MealItemID{
+    public static class MealsTable{
         public static final String NAME = "MealItem";
         public static class Cols{
             public static final String ID = "id";
