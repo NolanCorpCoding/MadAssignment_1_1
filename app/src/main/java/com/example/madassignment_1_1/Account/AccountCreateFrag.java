@@ -1,6 +1,5 @@
 package com.example.madassignment_1_1.Account;
 
-import android.accounts.Account;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.madassignment_1_1.R;
-import com.example.madassignment_1_1.Restaurants.RestaurantsFrag;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +26,7 @@ public class AccountCreateFrag extends Fragment {
     private EditText email;
     private Button next;
     private AccountMainPage mainPage;
+    private AccountCreateFrag thisFrag = this;
 
     public AccountCreateFrag() {
         // Required empty public constructor
@@ -64,10 +63,10 @@ public class AccountCreateFrag extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_account_create, container, false);
 
-        fName = (EditText) container.findViewById(R.id.editTextFName);
-        lName = (EditText) container.findViewById(R.id.editTextLName);
-        email = (EditText) container.findViewById(R.id.editTextEmail);
-        next = (Button) container.findViewById(R.id.button5);
+        fName = (EditText) view.findViewById(R.id.editTextFName);
+        lName = (EditText) view.findViewById(R.id.editTextLName);
+        email = (EditText) view.findViewById(R.id.editTextEmail);
+        next = (Button) view.findViewById(R.id.accountcreated);
 
 
         FragmentManager fm = getParentFragmentManager();
@@ -83,7 +82,8 @@ public class AccountCreateFrag extends Fragment {
                 {
                     mainPage = new AccountMainPage();
                 }
-                //fm.beginTransaction().remove(fragCurrent).commit();
+                fm.beginTransaction().remove(thisFrag).commit();
+                // maybe hold a reference to itself??
                 //fragCurrent = fragRes;
                 fm.beginTransaction().add(R.id.subMenu_frag_container, mainPage).commit();
             }
