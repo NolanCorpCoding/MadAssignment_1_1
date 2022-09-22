@@ -18,7 +18,7 @@ public class MealsList {
     private List<Meal> meals;
     MealItemDBModel mealItemDBModel;
     RestaurantDBModel restaurantDBModel;
-    RestaurantsMeals restaurantsMeals;
+    RestaurantsMealsCreator restaurantsMeals;
 
     public void load(Context context)
     {
@@ -30,7 +30,7 @@ public class MealsList {
         restaurantDBModel = new RestaurantDBModel();
         restaurantDBModel.load(context);
 
-        restaurantsMeals = new RestaurantsMeals(mealItemDBModel, restaurantDBModel);
+        restaurantsMeals = new RestaurantsMealsCreator(mealItemDBModel, restaurantDBModel);
 
         meals = mealItemDBModel.getAllUserAccounts();
 

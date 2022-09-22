@@ -4,11 +4,11 @@ import com.example.madassignment_1_1.Account.UserAccount;
 import com.example.madassignment_1_1.R;
 import com.example.madassignment_1_1.Restaurants.RestaurantDBModel;
 
-public class RestaurantsMeals {
+public class RestaurantsMealsCreator {
     MealItemDBModel mealItemDBModel;
     RestaurantDBModel restaurantDBModel;
 
-    public RestaurantsMeals(MealItemDBModel pMealItemDBModel, RestaurantDBModel pRestaurantDBModel) {
+    public RestaurantsMealsCreator(MealItemDBModel pMealItemDBModel, RestaurantDBModel pRestaurantDBModel) {
         this.mealItemDBModel = pMealItemDBModel;
         this.restaurantDBModel = pRestaurantDBModel;
     }
