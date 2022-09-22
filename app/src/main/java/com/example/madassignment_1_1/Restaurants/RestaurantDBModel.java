@@ -108,4 +108,33 @@ public class RestaurantDBModel
         }
         return restaurantID;
     }
+
+//    public boolean compareRestaurants(Restaurant rest1, Restaurant rest2)
+//    {
+//        boolean returnBool = false;
+//
+//        Log.d("COMPARE", "\nid 1 '" + rest1.getId() + "' == id 2 '" + rest2.getId() + "'");
+//
+//        if(rest1.getId() == rest2.getId())
+//        {
+//            Log.d("COMPARE", "name 1 '" + rest1.getName() + "' == name 2 '" + rest2.getName() + "'");
+//
+//            if(rest1.getName().equals(rest2.getName()))
+//            {
+//                Log.d("COMPARE", "addr 1 '" + rest1.getAddress() + "' == addr 2 '" + rest2.getAddress() + "'");
+//
+//                if(rest1.getAddress().equals(rest2.getAddress()))
+//                {
+//                    Log.d("COMPARE", "draw 1 '" + rest1.getDrawableID() + "' == draw 2 '" + rest2.getDrawableID() + "'");
+//
+//                    if(rest1.getDrawableID() == rest2.getDrawableID())
+//                    {
+//                        returnBool = true;
+//                    }
+//                }
+//            }
+//        }
+//
+//        return returnBool;
+//    }
 }

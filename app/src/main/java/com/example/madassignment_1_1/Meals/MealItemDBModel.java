@@ -23,29 +23,29 @@ public class MealItemDBModel
 
     }
 
-    public void addRestaurant(Meal pRestaurant)
+    public void addMealItem(Meals pRestaurant)
     {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(MealItemDBSchema.MealsTable.Cols.ID, pRestaurant.getId());
         contentValues.put(MealItemDBSchema.MealsTable.Cols.NAME, pRestaurant.getName());
         contentValues.put(MealItemDBSchema.MealsTable.Cols.PRICE, pRestaurant.getPrice());
-        contentValues.put(MealItemDBSchema.MealsTable.Cols.RESTAURANTID, pRestaurant.getRestaurantID());
-        contentValues.put(MealItemDBSchema.MealsTable.Cols.DRAWABLEREFERENCE, pRestaurant.getDrawableID());
+        contentValues.put(MealItemDBSchema.MealsTable.Cols.RESTAURANTID, pRestaurant.getRestaurantId());
+        contentValues.put(MealItemDBSchema.MealsTable.Cols.DRAWABLEREFERENCE, pRestaurant.getDrawableId());
         database.insert(MealItemDBSchema.MealsTable.NAME, null, contentValues);
     }
 
-    public void updateRestaurant() {}
+    public void updateMealItem() {}
 
-    public void deleteRestaurant(Meal pMeal)
+    public void deleteMealItem(Meals pMeal)
     {
         String[] whereValue = {String.valueOf(pMeal.getId())};
         database.delete(MealItemDBSchema.MealsTable.NAME, MealItemDBSchema.MealsTable.Cols.ID + "=?", whereValue);
     }
 
-    public ArrayList<Meal> getAllUserAccounts()
+    public ArrayList<Meals> getAllMealItems()
     {
-        ArrayList<Meal> mealItemList = new ArrayList<>();
+        ArrayList<Meals> mealItemList = new ArrayList<>();
         Cursor cursor = database.query(MealItemDBSchema.MealsTable.NAME,null,null,null,null,null,null);
         MealItemDBCursor mealItemDBCursor = new MealItemDBCursor(cursor);
 
@@ -85,7 +85,7 @@ public class MealItemDBModel
 
     public int getId(String pMealName, String pMealRestaurant)
     {
-        Meal tempMealItem = new Meal(0, null,  null, 0, 0);
+        Meals tempMealItem = new Meals(0, null,  0.0, 0, 0);
         int mealItemID = -1;
 
         Cursor cursor = database.query(MealItemDBSchema.MealsTable.NAME, null,
