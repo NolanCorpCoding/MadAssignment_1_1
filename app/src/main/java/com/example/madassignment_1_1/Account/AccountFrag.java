@@ -146,7 +146,7 @@ public class AccountFrag extends Fragment {
             UserAccount userAccount = useracctList.get(position);
             holder.textName.setText(userAccount.getFirstname() + " " + userAccount.getLastname());
             holder.textEmail.setText(userAccount.getEmail());
-            holder.textPass.setText(userAccount.getPassword());
+            holder.textPass.setText(userAccount.getPass());
         }
 
         @Override
