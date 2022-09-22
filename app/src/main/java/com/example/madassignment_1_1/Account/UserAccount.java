@@ -12,15 +12,17 @@ public class UserAccount
     private String firstname;
     private String lastname;
     private String email;
+    private String password;
 //    private Cart currentCart;
 //    private ArrayList<Cart> previousCarts;
 
-    public UserAccount(int pId, String pFirstname, String pLastname, String pEmail)
+    public UserAccount(int pId, String pFirstname, String pLastname, String pEmail, String pPassword)
     {
         this.id = pId;
         this.firstname = pFirstname;
         this.lastname = pLastname;
         this.email = pEmail;
+        this.password = pPassword;
 
         autoNextId = id + 1;
     }
@@ -55,6 +57,8 @@ public class UserAccount
         return this.email;
     }
 
+    public String getPassword() { return password; }
+
     public void setFirstname(String pFirstname)
     {
         this.firstname = pFirstname;
@@ -69,4 +73,6 @@ public class UserAccount
     {
         this.firstname = pEmail;
     }
+
+    public void setPassword(String pPassword) { this.password = pPassword; }
 }

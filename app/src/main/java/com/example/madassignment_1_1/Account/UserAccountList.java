@@ -26,9 +26,9 @@ public class UserAccountList {
         }
         else
         {
-            useraccountDBModel.getId("James", "Carey");
-            useraccountDBModel.getId("Angus", "Brayshaw");
-            useraccountDBModel.getId("Jack", "Tyson");
+            useraccountDBModel.getId("jamescarey@gmail.com", "jamescareypassword");
+            useraccountDBModel.getId("angusbrayshaw@htomail.com", "angusbrayshawpassword");
+            useraccountDBModel.getId("jacktyson@outlook.com", "jacktysonpassword");
         }
         Log.d("DEBUG", "FINISHED LOADING DB");
 
@@ -36,9 +36,9 @@ public class UserAccountList {
 
     private void addUsers()
     {
-        useraccountDBModel.addRestaurant(new UserAccount(1, "James", "Carey", "jamescarey@gmail.com"));
-        useraccountDBModel.addRestaurant(new UserAccount(2, "Angus", "Brayshaw", "angusbrayshaw@htomail.com"));
-        useraccountDBModel.addRestaurant(new UserAccount(3, "Jack", "Tyson", "jacktyson@outlook.com"));
+        useraccountDBModel.addRestaurant(new UserAccount(1, "James", "Carey", "jamescarey@gmail.com", "jamescareypassword"));
+        useraccountDBModel.addRestaurant(new UserAccount(2, "Angus", "Brayshaw", "angusbrayshaw@htomail.com", "angusbrayshawpassword"));
+        useraccountDBModel.addRestaurant(new UserAccount(3, "Jack", "Tyson", "jacktyson@outlook.com", "jacktysonpassword"));
     }
 
 
@@ -53,15 +53,5 @@ public class UserAccountList {
     {
         return userAccounts.size();
     }
-
-//    public void add(UserAccount s)
-//    {
-//        userAccounts.add(0, s);
-//    }
-//
-//    public void remove(int i)
-//    {
-//        userAccounts.remove(i);
-//    }
 
 }

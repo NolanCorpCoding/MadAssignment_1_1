@@ -78,11 +78,13 @@ public class AccountFrag extends Fragment {
     public class UserAccountViewHolder extends RecyclerView.ViewHolder {
         TextView textName;
         TextView textEmail;
+        TextView textPass;
 
         public UserAccountViewHolder(@NonNull View itemView, ViewGroup parent) {
             super(itemView);
             textName = itemView.findViewById(R.id.tempUserName);
             textEmail = itemView.findViewById(R.id.tempUserEmail);
+            textPass = itemView.findViewById(R.id.tempUserPassword);
 
         }
     }
@@ -114,6 +116,7 @@ public class AccountFrag extends Fragment {
             UserAccount userAccount = useracctList.get(position);
             holder.textName.setText(userAccount.getFirstname() + " " + userAccount.getLastname());
             holder.textEmail.setText(userAccount.getEmail());
+            holder.textPass.setText(userAccount.getPassword());
         }
 
         @Override

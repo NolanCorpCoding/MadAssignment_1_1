@@ -29,7 +29,7 @@ public class RestaurantList {
         }
         else
         {
-            restaurantDBModel.getId("Dominos");
+            restaurantDBModel.getId("Domhoes");
             restaurantDBModel.getId("KFC");
             restaurantDBModel.getId("McDonalds");
         }

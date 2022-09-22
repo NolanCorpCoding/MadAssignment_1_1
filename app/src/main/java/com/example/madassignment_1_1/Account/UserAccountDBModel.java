@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
 
@@ -31,7 +32,7 @@ public class UserAccountDBModel
         contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.FIRSTNAME, pRestaurant.getFirstname());
         contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.LASTNAME, pRestaurant.getLastname());
         contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.EMAIL, pRestaurant.getEmail());
-
+        contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.PASSWORD, pRestaurant.getPassword());
         database.insert(UserAccountDBSchema.UserAccountTable.NAME, null, contentValues);
     }
 
@@ -83,27 +84,31 @@ public class UserAccountDBModel
         return tableSize;
     }
 
-    public int getId(String useraccountFirstName, String useraccountLastName)
+    public int getId(String userAccountEmail, String userAccountPassword)
     {
         UserAccount tempUserAccount = new UserAccount(null, null,  null);
-        int restaurantID = -1;
+        int userAccountID = -1;
 
 //        Cursor cursor = database.query(RestaurantTable.NAME, new String[] {RestaurantTable.Cols.ID},RestaurantTable.Cols.NAME + " = ?",new String[] {restaurantName},null,null,null);
-        Cursor cursor = database.query(UserAccountDBSchema.UserAccountTable.NAME, null, UserAccountDBSchema.UserAccountTable.Cols.FIRSTNAME + " = ? AND " + UserAccountDBSchema.UserAccountTable.Cols.LASTNAME + " = ?" ,new String[] {useraccountFirstName, useraccountLastName},null,null,null);
+        Cursor cursor = database.query(UserAccountDBSchema.UserAccountTable.NAME, null, UserAccountDBSchema.UserAccountTable.Cols.EMAIL + " = ? AND " + UserAccountDBSchema.UserAccountTable.Cols.PASSWORD + " = ?",new String[] {userAccountEmail, userAccountPassword},null,null,null);
         UserAccountDBCursor useraccountDBCursor = new UserAccountDBCursor(cursor);
 
         try{
             useraccountDBCursor.moveToFirst();
             tempUserAccount = useraccountDBCursor.getUserAccount();
-            restaurantID = tempUserAccount.getId();
-            Log.d("WHILE LOOP", "ID = " + restaurantID + " for when the USER ACCOUNT = " + tempUserAccount.getFirstname() + " " + tempUserAccount.getLastname());
+            userAccountID = tempUserAccount.getId();
+            Log.d("WHILE LOOP", "ID = " + userAccountID + " for when the USER ACCOUNT = " + tempUserAccount.getFirstname() + " " + tempUserAccount.getLastname());
         }
         catch(CursorIndexOutOfBoundsException e) {
-            Log.d("ERROR", "ERROR: " + e.getCause() + " ... " + e.getLocalizedMessage());
+            Log.d("WHILE LOOP ERROR", "ERROR: " + e.getCause() + " ... " + e.getLocalizedMessage());
+        }
+        catch(SQLiteException e)
+        {
+            Log.d("WHILE LOOP ERROR", "ERROR: " + e.getCause() + " ... " + e.getLocalizedMessage());
         }
         finally {
             cursor.close();
         }
-        return restaurantID;
+        return userAccountID;
     }
 }
