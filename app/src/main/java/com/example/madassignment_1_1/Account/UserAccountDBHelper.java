@@ -18,7 +18,7 @@ public class UserAccountDBHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase)
     {
-        sqLiteDatabase.execSQL("create table "+UserAccountTable.NAME+"("+UserAccountTable.Cols.ID+" INT, "+UserAccountTable.Cols.FIRSTNAME+" TEXT,  "+UserAccountTable.Cols.LASTNAME+" TEXT,  "+ UserAccountTable.Cols.EMAIL+ " TEXT);");
+        sqLiteDatabase.execSQL("create table "+UserAccountTable.NAME+"("+UserAccountTable.Cols.ID+" INT, "+UserAccountTable.Cols.FIRSTNAME+" TEXT,  "+UserAccountTable.Cols.LASTNAME+" TEXT,  "+ UserAccountTable.Cols.EMAIL+ " TEXT, " + UserAccountTable.Cols.PASS + " TEXT);");
     }
 
     @Override

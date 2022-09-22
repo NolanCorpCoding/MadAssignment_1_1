@@ -10,23 +10,26 @@ public class UserAccount
     private String firstname;
     private String lastname;
     private String email;
+    private String pass;
 
-    public UserAccount(int pId, String pFirstname, String pLastname, String pEmail)
+    public UserAccount(int pId, String pFirstname, String pLastname, String pEmail, String pPass)
     {
         this.id = pId;
         this.firstname = pFirstname;
         this.lastname = pLastname;
         this.email = pEmail;
+        this.pass = pPass;
 
         autoNextId = id + 1;
     }
 
-    public UserAccount(String pFirstname, String pLastname, String pEmail)
+    public UserAccount(String pFirstname, String pLastname, String pEmail, String pPass)
     {
         this.id = autoNextId;
         this.firstname = pFirstname;
         this.lastname = pLastname;
         this.email = pEmail;
+        this.pass = pPass;
 
         autoNextId++;
     }
@@ -51,6 +54,8 @@ public class UserAccount
         return this.email;
     }
 
+    public String getPass() { return this.pass; }
+
     public void setFirstname(String pFirstname)
     {
         this.firstname = pFirstname;
@@ -65,4 +70,6 @@ public class UserAccount
     {
         this.firstname = pEmail;
     }
+
+    public void setPass(String pPass) { this.pass = pPass; }
 }
