@@ -23,6 +23,35 @@ public class AccountFrag extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private static String currFName;
+    private static String currLName;
+    private static String currEmail;
+    private static String currPass;
+
+    public static void setDetails(String fName, String lName, String email, String pass){
+        currFName = fName;
+        currLName = lName;
+        currEmail = email;
+        currPass = pass;
+    }
+
+    public static String getFName(){
+        return currFName;
+    }
+
+    public static String getLName(){
+        return currLName;
+    }
+
+    public static String getEmail(){
+        return currEmail;
+    }
+
+    public static String getPass(){
+        return currPass;
+    }
+
+
     public AccountFrag() {
         // Required empty public constructor
     }

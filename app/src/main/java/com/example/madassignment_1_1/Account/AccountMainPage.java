@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.madassignment_1_1.R;
 
@@ -25,6 +27,20 @@ public class AccountMainPage extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private String fNameText;
+    private String lNameText;
+    private String emailText;
+    private String passText;
+
+    private EditText fName;
+    private EditText lName;
+    private EditText email;
+    private EditText pass;
+
+    private Button updateDetails;
+
+
 
     public AccountMainPage() {
         // Required empty public constructor
@@ -61,6 +77,32 @@ public class AccountMainPage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account_main_page, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_account_main_page, container, false);
+
+        fName = (EditText) view.findViewById(R.id.editTextFName);
+        lName = (EditText) view.findViewById(R.id.editTextLName);
+        email = (EditText) view.findViewById(R.id.editTextEmail);
+        pass = (EditText) view.findViewById(R.id.editTextPass);
+        updateDetails = (Button) view.findViewById(R.id.updateButton);
+
+        fName.setText(AccountFrag.getFName());
+        lName.setText(AccountFrag.getLName());
+        email.setText(AccountFrag.getEmail());
+        pass.setText(AccountFrag.getPass());
+
+        updateDetails.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                String fNameText = fName.getText().toString();
+                String lNameText = lName.getText().toString();
+                String emailText = email.getText().toString();
+                String passText = pass.getText().toString();
+                AccountFrag.setDetails(fNameText, lNameText, emailText, passText);
+            }
+        });
+
+        return view;
     }
 }

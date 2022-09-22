@@ -24,6 +24,7 @@ public class AccountCreateFrag extends Fragment {
     private EditText fName;
     private EditText lName;
     private EditText email;
+    private EditText pass;
     private Button next;
     private AccountMainPage mainPage;
     private AccountCreateFrag thisFrag = this;
@@ -66,7 +67,8 @@ public class AccountCreateFrag extends Fragment {
         fName = (EditText) view.findViewById(R.id.editTextFName);
         lName = (EditText) view.findViewById(R.id.editTextLName);
         email = (EditText) view.findViewById(R.id.editTextEmail);
-        next = (Button) view.findViewById(R.id.accountcreated);
+        pass = (EditText) view.findViewById(R.id.editTextPass);
+        next = (Button) view.findViewById(R.id.logOutButton);
 
 
         FragmentManager fm = getParentFragmentManager();
@@ -82,9 +84,15 @@ public class AccountCreateFrag extends Fragment {
                 {
                     mainPage = new AccountMainPage();
                 }
+                String fNameText = fName.getText().toString();
+                String lNameText = lName.getText().toString();
+                String emailText = email.getText().toString();
+                String passText = pass.getText().toString();
+                AccountFrag.setDetails(fNameText, lNameText, emailText, passText);
+
                 fm.beginTransaction().remove(thisFrag).commit();
-                // maybe hold a reference to itself??
                 //fragCurrent = fragRes;
+
                 fm.beginTransaction().add(R.id.subMenu_frag_container, mainPage).commit();
             }
         }
