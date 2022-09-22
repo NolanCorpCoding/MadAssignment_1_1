@@ -27,12 +27,12 @@ public class RestaurantList {
         {
             addRestaurants();
         }
-        else
-        {
-            restaurantDBModel.getId("Domhoes");
-            restaurantDBModel.getId("KFC");
-            restaurantDBModel.getId("McDonalds");
-        }
+//        else
+//        {
+//            restaurantDBModel.getId("Dominos");
+//            restaurantDBModel.getId("KFC");
+//            restaurantDBModel.getId("McDonalds");
+//        }
     }
 
     private void addRestaurants()

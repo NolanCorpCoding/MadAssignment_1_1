@@ -89,8 +89,7 @@ public class UserAccountDBModel
         UserAccount tempUserAccount = new UserAccount(null, null,  null, null);
         int userAccountID = -1;
 
-//        Cursor cursor = database.query(RestaurantTable.NAME, new String[] {RestaurantTable.Cols.ID},RestaurantTable.Cols.NAME + " = ?",new String[] {restaurantName},null,null,null);
-        Cursor cursor = database.query(UserAccountDBSchema.UserAccountTable.NAME, null, UserAccountDBSchema.UserAccountTable.Cols.EMAIL + " = ? AND " + UserAccountDBSchema.UserAccountTable.Cols.PASS + " = ?",new String[] {userAccountEmail, userAccountPassword},null,null,null);
+        Cursor cursor = database.query(UserAccountDBSchema.UserAccountTable.NAME, new String[] {UserAccountDBSchema.UserAccountTable.Cols.ID}, UserAccountDBSchema.UserAccountTable.Cols.EMAIL + " = ? AND " + UserAccountDBSchema.UserAccountTable.Cols.PASS + " = ?",new String[] {userAccountEmail, userAccountPassword},null,null,null);
         UserAccountDBCursor useraccountDBCursor = new UserAccountDBCursor(cursor);
 
         try{

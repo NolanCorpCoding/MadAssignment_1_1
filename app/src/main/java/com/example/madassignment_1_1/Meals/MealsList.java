@@ -1,52 +1,75 @@
 package com.example.madassignment_1_1.Meals;
 
+import android.content.Context;
+import android.util.Log;
+
+import com.example.madassignment_1_1.Account.UserAccount;
+import com.example.madassignment_1_1.Account.UserAccountDBModel;
 import com.example.madassignment_1_1.R;
 import com.example.madassignment_1_1.Restaurants.Restaurant;
+import com.example.madassignment_1_1.Restaurants.RestaurantDBModel;
 import com.example.madassignment_1_1.Restaurants.RestaurantList;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class MealsList {
+    private List<Meal> meals;
+    MealItemDBModel mealItemDBModel;
+    RestaurantDBModel restaurantDBModel;
+    RestaurantsMeals restaurantsMeals;
 
-    private List<Meal> mealsList = Arrays.asList(new Meal[]{
-            new Meal(R.drawable.dominos, "Dominos", 12.0),
-            new Meal(R.drawable.kfc, "KFC", 10.0),
-            new Meal(R.drawable.maccas, "McDonalds", 12.5),
-    });
-
-
-    private static MealsList instance = null;
-
-    public static MealsList get()
+    public void load(Context context)
     {
-        if(instance == null)
+        meals = new ArrayList<>();
+
+        mealItemDBModel = new MealItemDBModel();
+        mealItemDBModel.load(context);
+
+        restaurantDBModel = new RestaurantDBModel();
+        restaurantDBModel.load(context);
+
+        restaurantsMeals = new RestaurantsMeals(mealItemDBModel, restaurantDBModel);
+
+        meals = mealItemDBModel.getAllUserAccounts();
+
+        if(mealItemDBModel.getNumTuples() <= 0)
         {
-            instance = new MealsList();
+            Log.d("DEBUG", "CREATING NEW USERS");
+            restaurantsMeals.DominosMeals();
+
         }
-        return instance;
+//        else
+//        {
+//            useraccountDBModel.getId("jamescarey@gmail.com", "jamescareypassword");
+//            useraccountDBModel.getId("angusbrayshaw@htomail.com", "angusbrayshawpassword");
+//            useraccountDBModel.getId("jacktyson@outlook.com", "jacktysonpassword");
+//        }
+        Log.d("DEBUG", "FINISHED LOADING DB");
+
     }
 
     protected MealsList() {}
 
     public Meal get(int i)
     {
-        return mealsList.get(i);
+        return meals.get(i);
     }
 
     public int size()
     {
-        return mealsList.size();
+        return meals.size();
     }
 
     public void add(Meal s)
     {
-        mealsList.add(0, s);
+        meals.add(0, s);
     }
 
     public void remove(int i)
     {
-        mealsList.remove(i);
+        meals.remove(i);
     }
 
 
