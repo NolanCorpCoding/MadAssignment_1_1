@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
 import java.lang.reflect.Array;
@@ -103,6 +104,10 @@ public class RestaurantDBModel
         }
         catch(CursorIndexOutOfBoundsException e) {
             Log.d("ERROR", "ERROR: " + e.getCause() + " ... " + e.getLocalizedMessage());
+        }
+        catch(SQLiteException e)
+        {
+            Log.d("WHILE LOOP ERROR", "ERROR: " + e.getCause() + " ... " + e.getLocalizedMessage());
         }
         finally {
             cursor.close();
