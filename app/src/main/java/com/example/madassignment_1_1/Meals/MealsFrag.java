@@ -2,13 +2,24 @@ package com.example.madassignment_1_1.Meals;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.madassignment_1_1.R;
+import com.example.madassignment_1_1.Restaurants.Restaurant;
+import com.example.madassignment_1_1.Restaurants.RestaurantList;
+import com.example.madassignment_1_1.Restaurants.RestaurantsFrag;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +36,8 @@ public class MealsFrag extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private MealsList mealsList;
 
     public MealsFrag() {
         // Required empty public constructor
@@ -55,12 +68,109 @@ public class MealsFrag extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        mealsList = new MealsList();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_food, container, false);
+        View view = inflater.inflate(R.layout.fragment_food, container, false);
+        RecyclerView rv = view.findViewById(R.id.rvFood);
+        rv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        MealsFrag.MealAdapter adapter = new MealsFrag.MealAdapter(mealsList);
+        rv.setAdapter(adapter);
+        return view;
+    }
+
+    public class MealViewHolder extends RecyclerView.ViewHolder {
+        TextView mealName;
+        TextView mealPrice;
+        TextView mealNum;
+        ImageView img;
+        Button plus;
+        Button minus;
+
+        public MealViewHolder(@NonNull View itemView, ViewGroup parent) {
+            super(itemView);
+            mealName = itemView.findViewById(R.id.mealName);
+            mealPrice = itemView.findViewById(R.id.mealPrice);
+            mealNum = itemView.findViewById(R.id.mealNum);
+            img = itemView.findViewById(R.id.imgMealIcon);
+            plus = itemView.findViewById(R.id.plusButton);
+            minus = itemView.findViewById(R.id.minusButton);
+
+        }
+    }
+
+
+
+
+
+    public class MealAdapter extends RecyclerView.Adapter<MealsFrag.MealViewHolder> {
+
+        MealsList data;
+
+        public MealAdapter(MealsList data){
+            this.data = data;
+        }
+
+        @NonNull
+        @Override
+        public MealsFrag.MealViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            Log.d("adapter: ", "on create view");
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            View view = layoutInflater.inflate(R.layout.meal_entry,parent,false);
+            MealsFrag.MealViewHolder myViewHolder = new MealsFrag.MealViewHolder(view, parent);
+            return myViewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull MealsFrag.MealViewHolder holder, int position) {
+//            Restaurant restaurant = resList.get(position);
+//            holder.img.setImageResource(restaurant.getDrawableID());
+//            holder.textName.setText(restaurant.getName());
+//            holder.textAddress.setText(restaurant.getAddress());
+
+//            holder.img.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Toast.makeText(view.getContext(), "clicked menu item", Toast.LENGTH_SHORT).show(); //doesnt work
+//                    //Menu.setSelected(structure);
+//                    //THIS IS WHERE THE "ACTION" HAPPENS
+//                }
+//            });
+            Meal meal = mealsList.get(position);
+            holder.mealName.setText(meal.getName());
+            holder.mealPrice.setText(String.valueOf(meal.getPrice()));
+            holder.img.setImageResource(meal.getDrawableID());
+
+            holder.mealNum.setText("0");
+            // the number of meals in the cart needs to gotten from the cart i believe
+
+            holder.plus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // need to update database here
+                    holder.mealNum.setText( Double.toString(Double.parseDouble(holder.mealNum.getText().toString()) + 1));
+                    // this is probably a dumb way of doing this for now, add a dedicated variable somewhere later
+                }
+            });
+
+            holder.minus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // need to update database here
+                    holder.mealNum.setText( Double.toString(Double.parseDouble(holder.mealNum.getText().toString()) - 1));
+                    // this is probably a dumb way of doing this for now, add a dedicated variable somewhere later
+                }
+            });
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return data.size();
+        }
     }
 }

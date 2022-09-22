@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.madassignment_1_1.Meals.MealsFrag;
 import com.example.madassignment_1_1.R;
 
 /**
@@ -28,6 +30,9 @@ public class RestaurantsFrag extends Fragment {
     private TextView title;
     private RecyclerView rv;
     private LinearLayoutManager rvLayout;
+
+    private FragmentManager fm;
+    private RestaurantsFrag thisFrag;
 
 
     public RestaurantsFrag() {
@@ -51,6 +56,9 @@ public class RestaurantsFrag extends Fragment {
 
         resList = new RestaurantList();
         resList.load(getActivity());
+        thisFrag = this;
+
+        fm = getParentFragmentManager();
     }
 
     @Override
@@ -59,7 +67,7 @@ public class RestaurantsFrag extends Fragment {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_restaurants, container, false);
         View view = inflater.inflate(R.layout.fragment_restaurants, container, false);
-        RecyclerView rv = view.findViewById(R.id.rvRes);
+        RecyclerView rv = view.findViewById(R.id.rvFood);
         rv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         RestaurantAdapter adapter = new RestaurantAdapter(resList);
         rv.setAdapter(adapter);
@@ -119,8 +127,9 @@ public class RestaurantsFrag extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(view.getContext(), "clicked menu item", Toast.LENGTH_SHORT).show(); //doesnt work
-                    //Menu.setSelected(structure);
                     //THIS IS WHERE THE "ACTION" HAPPENS
+                    fm.beginTransaction().remove(thisFrag).commit();
+                    fm.beginTransaction().add(R.id.frameLayout, new MealsFrag()).commit();
                 }
             });
         }
