@@ -8,7 +8,9 @@ public class UserAccountDBSchema {
             public static final String FIRSTNAME = "firstname";
             public static final String LASTNAME = "lastname";
             public static final String EMAIL = "email";
-            public static final String PASSWORD = "password";
+            public static final String PASS = "pass";
+//            public static final String CURRENTCART = "currentCart";
+//            public static final String PREVIOUSCARTS = "previousCarts";
         }
     }
 }
