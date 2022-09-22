@@ -91,7 +91,6 @@ public class RestaurantDBModel
         Restaurant tempRestaurant = new Restaurant(null, null,  0);
         int restaurantID = -1;
 
-//        Cursor cursor = database.query(RestaurantTable.NAME, new String[] {RestaurantTable.Cols.ID},RestaurantTable.Cols.NAME + " = ?",new String[] {restaurantName},null,null,null);
         Cursor cursor = database.query(RestaurantTable.NAME, null,RestaurantTable.Cols.NAME + " = ?",new String[] {restaurantName},null,null,null);
         RestaurantDBCursor restaurantDBCursor = new RestaurantDBCursor(cursor);
 

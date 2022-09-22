@@ -89,12 +89,16 @@ public class UserAccountDBModel
         UserAccount tempUserAccount = new UserAccount(null, null,  null, null);
         int userAccountID = -1;
 
-        Cursor cursor = database.query(UserAccountDBSchema.UserAccountTable.NAME, new String[] {UserAccountDBSchema.UserAccountTable.Cols.ID}, UserAccountDBSchema.UserAccountTable.Cols.EMAIL + " = ? AND " + UserAccountDBSchema.UserAccountTable.Cols.PASS + " = ?",new String[] {userAccountEmail, userAccountPassword},null,null,null);
+        Cursor cursor = database.query(UserAccountDBSchema.UserAccountTable.NAME, null,
+                UserAccountDBSchema.UserAccountTable.Cols.EMAIL + " = ? AND " + UserAccountDBSchema.UserAccountTable.Cols.PASS + " = ?",new String[] {userAccountEmail, userAccountPassword},null,null,null);
         UserAccountDBCursor useraccountDBCursor = new UserAccountDBCursor(cursor);
 
         try{
+            Log.d("DEBUG", "Beginning of Try statement inside the UserAccountDBModel.getID() method");
             useraccountDBCursor.moveToFirst();
+            Log.d("DEBUG", "Moves to the first element of the query inside of the Try statement inside the UserAccountDBModel.getID() method");
             tempUserAccount = useraccountDBCursor.getUserAccount();
+            Log.d("DEBUG", "Finds the user account id inside of the Try statement inside the UserAccountDBModel.getID() method");
             userAccountID = tempUserAccount.getId();
             Log.d("WHILE LOOP", "ID = " + userAccountID + " for when the USER ACCOUNT = " + tempUserAccount.getFirstname() + " " + tempUserAccount.getLastname());
         }

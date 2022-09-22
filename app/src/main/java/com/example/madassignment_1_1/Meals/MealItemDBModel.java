@@ -88,7 +88,7 @@ public class MealItemDBModel
         Meal tempMealItem = new Meal(0, null,  null, 0, 0);
         int mealItemID = -1;
 
-        Cursor cursor = database.query(MealItemDBSchema.MealsTable.NAME, new String[] {MealItemDBSchema.MealsTable.Cols.ID},
+        Cursor cursor = database.query(MealItemDBSchema.MealsTable.NAME, null,
                 MealItemDBSchema.MealsTable.Cols.NAME + " = ? AND " + MealItemDBSchema.MealsTable.Cols.RESTAURANTID + " = ?",new String[] {pMealName, pMealRestaurant},null,null,null);
 
         MealItemDBCursor mealItemDBCursor = new MealItemDBCursor(cursor);
