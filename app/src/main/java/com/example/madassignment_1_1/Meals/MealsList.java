@@ -36,7 +36,7 @@ public class MealsList {
         Log.d("DEBUG", "MEALS...");
         for(Meals meal : currMeals)
         {
-            Log.d("DEBUG", "MEAL: id:" + meal.getId() + " name:" + meal.getName() + " price:" + meal.getPrice());
+            Log.d("DEBUG", "MEAL: id:" + meal.getId() + " name:" + meal.getName() + " price:" + meal.getPrice() + " restaurantid:" + meal.getRestaurantId());
         }
 
 //        if(mealItemDBModel.getNumTuples() <= 0)
@@ -55,7 +55,7 @@ public class MealsList {
 
     }
 
-    protected MealsList() {}
+    public MealsList() {}
 
     public Meals get(int i)
     {
@@ -70,6 +70,7 @@ public class MealsList {
 
     public void checkNewMeals()
     {
+        Log.d("DEBUG", "Started Comparison");
         boolean mealFound = false;
         for(Meals meal : allMeals)
         {

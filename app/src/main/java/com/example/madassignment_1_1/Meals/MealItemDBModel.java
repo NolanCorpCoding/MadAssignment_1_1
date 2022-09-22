@@ -17,9 +17,9 @@ public class MealItemDBModel
     public void load(Context context)
     {
         this.database = new MealItemDBHelper(context).getWritableDatabase();
-//        Log.d("WARNING", "Resetting the database");
-//        new UserAccountDBHelper(context).deleteTable(database);
-//        new UserAccountDBHelper(context).onCreate(database);
+//        Log.d("WARNING", "Resetting the meal database");
+//        new MealItemDBHelper(context).deleteTable(database);
+//        new MealItemDBHelper(context).onCreate(database);
 
     }
 
