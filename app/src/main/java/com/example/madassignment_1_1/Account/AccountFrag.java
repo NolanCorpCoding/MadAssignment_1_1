@@ -100,58 +100,58 @@ public class AccountFrag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_account, container, false);
-        View view = inflater.inflate(R.layout.tempaccountfragment, container, false);
-        RecyclerView rv = view.findViewById(R.id.rvUserAcct);
-        rv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        UserAccountAdapter adapter = new UserAccountAdapter(useracctList);
-        rv.setAdapter(adapter);
+        View view = inflater.inflate(R.layout.parent_fragment_account, container, false);
+//        RecyclerView rv = view.findViewById(R.id.rvUserAcct);
+//        rv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+//        UserAccountAdapter adapter = new UserAccountAdapter(useracctList);
+//        rv.setAdapter(adapter);
         return view;
     }
 
-    public class UserAccountViewHolder extends RecyclerView.ViewHolder {
-        TextView textName;
-        TextView textEmail;
-        TextView textPass;
+//    public class UserAccountViewHolder extends RecyclerView.ViewHolder {
+//        TextView textName;
+//        TextView textEmail;
+//        TextView textPass;
+//
+//        public UserAccountViewHolder(@NonNull View itemView, ViewGroup parent) {
+//            super(itemView);
+//            textName = itemView.findViewById(R.id.tempUserName);
+//            textEmail = itemView.findViewById(R.id.tempUserEmail);
+//            textPass = itemView.findViewById(R.id.tempUserPassword);
+//
+//        }
+//    }
 
-        public UserAccountViewHolder(@NonNull View itemView, ViewGroup parent) {
-            super(itemView);
-            textName = itemView.findViewById(R.id.tempUserName);
-            textEmail = itemView.findViewById(R.id.tempUserEmail);
-            textPass = itemView.findViewById(R.id.tempUserPassword);
 
-        }
-    }
-
-
-    public class UserAccountAdapter extends RecyclerView.Adapter<AccountFrag.UserAccountViewHolder> {
-
-        UserAccountList data;
-
-        public UserAccountAdapter(UserAccountList data){
-            this.data = data;
-        }
-
-        @NonNull
-        @Override
-        public AccountFrag.UserAccountViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            Log.d("adapter: ", "on create view");
-            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-            View view = layoutInflater.inflate(R.layout.temp_account_entry,parent,false);
-            AccountFrag.UserAccountViewHolder myViewHolder = new AccountFrag.UserAccountViewHolder(view, parent);
-            return myViewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull AccountFrag.UserAccountViewHolder holder, int position) {
-            UserAccount userAccount = useracctList.get(position);
-            holder.textName.setText(userAccount.getFirstname() + " " + userAccount.getLastname());
-            holder.textEmail.setText(userAccount.getEmail());
-            holder.textPass.setText(userAccount.getPass());
-        }
-
-        @Override
-        public int getItemCount() {
-            return data.size();
-        }
-    }
+//    public class UserAccountAdapter extends RecyclerView.Adapter<AccountFrag.UserAccountViewHolder> {
+//
+//        UserAccountList data;
+//
+//        public UserAccountAdapter(UserAccountList data){
+//            this.data = data;
+//        }
+//
+//        @NonNull
+//        @Override
+//        public AccountFrag.UserAccountViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//            Log.d("adapter: ", "on create view");
+//            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+//            View view = layoutInflater.inflate(R.layout.temp_account_entry,parent,false);
+//            AccountFrag.UserAccountViewHolder myViewHolder = new AccountFrag.UserAccountViewHolder(view, parent);
+//            return myViewHolder;
+//        }
+//
+//        @Override
+//        public void onBindViewHolder(@NonNull AccountFrag.UserAccountViewHolder holder, int position) {
+//            UserAccount userAccount = useracctList.get(position);
+//            holder.textName.setText(userAccount.getFirstname() + " " + userAccount.getLastname());
+//            holder.textEmail.setText(userAccount.getEmail());
+//            holder.textPass.setText(userAccount.getPass());
+//        }
+//
+//        @Override
+//        public int getItemCount() {
+//            return data.size();
+//        }
+//    }
 }
