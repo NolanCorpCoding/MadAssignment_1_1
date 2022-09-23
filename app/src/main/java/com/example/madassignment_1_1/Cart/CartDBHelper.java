@@ -18,7 +18,7 @@ public class CartDBHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase)
     {
-        sqLiteDatabase.execSQL("create table "+ CartDBSchema.CartTable.NAME+"("+ CartDBSchema.CartTable.Cols.ID+" INT, "+ CartDBSchema.CartTable.Cols.PRICE+" REAL,  "+ CartDBSchema.CartTable.Cols.RESTAURANTID+ " TEXT,  "+ CartDBSchema.CartTable.Cols.USERACCOUNTID+ " TEXT);");
+        sqLiteDatabase.execSQL("create table "+ CartDBSchema.CartTable.NAME+"("+ CartDBSchema.CartTable.Cols.ID+" INT, "+ CartDBSchema.CartTable.Cols.PRICE+" REAL,  "+ CartDBSchema.CartTable.Cols.RESTAURANTID+ " TEXT,  "+ CartDBSchema.CartTable.Cols.USERACCOUNTID+ " TEXT, " + CartDBSchema.CartTable.Cols.ORDERTIME + " TEXT);");
     }
 
     @Override

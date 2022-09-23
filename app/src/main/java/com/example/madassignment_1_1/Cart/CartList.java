@@ -35,13 +35,6 @@ public class CartList {
 
     }
 
-//    private void addUsers()
-//    {
-//        useraccountDBModel.addRestaurant(new UserAccount(1, "James", "Carey", "jamescarey@gmail.com", "jamescareypassword"));
-//        useraccountDBModel.addRestaurant(new UserAccount(2, "Angus", "Brayshaw", "angusbrayshaw@htomail.com", "angusbrayshawpassword"));
-//        useraccountDBModel.addRestaurant(new UserAccount(3, "Jack", "Tyson", "jacktyson@outlook.com", "jacktysonpassword"));
-//    }
-
 
     protected CartList() {}
 
