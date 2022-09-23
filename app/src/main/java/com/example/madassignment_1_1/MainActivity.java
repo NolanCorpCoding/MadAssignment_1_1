@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         b2 = (Button)findViewById(R.id.button2);
         b3 = (Button)findViewById(R.id.button3);
         b4 = (Button)findViewById(R.id.button4);
+
+        Log.d("debug Sam", "test main");
 
 
         FragmentManager fm = getSupportFragmentManager();

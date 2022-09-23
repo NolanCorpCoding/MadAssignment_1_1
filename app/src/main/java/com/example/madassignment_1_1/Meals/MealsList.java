@@ -17,6 +17,7 @@ public class MealsList {
 
     public void load(Context context)
     {
+        Log.d("debug Sam", "loading MealsList start");
         currMeals = new ArrayList<>();
         allMeals = new ArrayList<>();
 
@@ -55,7 +56,9 @@ public class MealsList {
 
     }
 
-    public MealsList() {}
+    public MealsList(Context pContext) {
+        load(pContext);
+    }
 
     public Meals get(int i)
     {
