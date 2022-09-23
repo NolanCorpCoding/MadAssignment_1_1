@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.madassignment_1_1.R;
 
@@ -32,6 +33,8 @@ public class AccountMainPage extends Fragment {
     private String lNameText;
     private String emailText;
     private String passText;
+
+    private TextView title;
 
     private EditText fName;
     private EditText lName;
@@ -86,10 +89,14 @@ public class AccountMainPage extends Fragment {
         pass = (EditText) view.findViewById(R.id.editTextPass);
         updateDetails = (Button) view.findViewById(R.id.updateButton);
 
+        title = (TextView) view.findViewById(R.id.accTitle);
+
         fName.setText(AccountFrag.getFName());
         lName.setText(AccountFrag.getLName());
         email.setText(AccountFrag.getEmail());
         pass.setText(AccountFrag.getPass());
+
+        title.setText("Hi " + AccountFrag.getFName());
 
         updateDetails.setOnClickListener(new View.OnClickListener()
         {
