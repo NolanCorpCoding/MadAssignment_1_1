@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -28,14 +29,20 @@ public class RestaurantDBModel
 
     public void addRestaurant(Restaurant pRestaurant)
     {
-        ContentValues contentValues = new ContentValues();
+        try {
+            ContentValues contentValues = new ContentValues();
 
-        contentValues.put(RestaurantTable.Cols.ID, pRestaurant.getId());
-        contentValues.put(RestaurantTable.Cols.NAME, pRestaurant.getName());
-        contentValues.put(RestaurantTable.Cols.ADDRESS, pRestaurant.getAddress());
-        contentValues.put(RestaurantTable.Cols.DRAWABLEREFERENCE, pRestaurant.getDrawableID());
+            contentValues.put(RestaurantTable.Cols.ID, pRestaurant.getId());
+            contentValues.put(RestaurantTable.Cols.NAME, pRestaurant.getName());
+            contentValues.put(RestaurantTable.Cols.ADDRESS, pRestaurant.getAddress());
+            contentValues.put(RestaurantTable.Cols.DRAWABLEREFERENCE, pRestaurant.getDrawableID());
 
-        database.insert(RestaurantTable.NAME, null, contentValues);
+            database.insert(RestaurantTable.NAME, null, contentValues);
+        }
+        catch(SQLiteConstraintException e)
+        {
+            Log.d("DEBUG", "ERROR inside " + e.getStackTrace() + " ... Reason: " + e.getMessage());
+        }
     }
 
     public void updateRestaurant() {}
@@ -108,33 +115,4 @@ public class RestaurantDBModel
         }
         return restaurantID;
     }
-
-//    public boolean compareRestaurants(Restaurant rest1, Restaurant rest2)
-//    {
-//        boolean returnBool = false;
-//
-//        Log.d("COMPARE", "\nid 1 '" + rest1.getId() + "' == id 2 '" + rest2.getId() + "'");
-//
-//        if(rest1.getId() == rest2.getId())
-//        {
-//            Log.d("COMPARE", "name 1 '" + rest1.getName() + "' == name 2 '" + rest2.getName() + "'");
-//
-//            if(rest1.getName().equals(rest2.getName()))
-//            {
-//                Log.d("COMPARE", "addr 1 '" + rest1.getAddress() + "' == addr 2 '" + rest2.getAddress() + "'");
-//
-//                if(rest1.getAddress().equals(rest2.getAddress()))
-//                {
-//                    Log.d("COMPARE", "draw 1 '" + rest1.getDrawableID() + "' == draw 2 '" + rest2.getDrawableID() + "'");
-//
-//                    if(rest1.getDrawableID() == rest2.getDrawableID())
-//                    {
-//                        returnBool = true;
-//                    }
-//                }
-//            }
-//        }
-//
-//        return returnBool;
-//    }
 }

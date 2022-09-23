@@ -56,6 +56,8 @@ public class RestaurantList {
         allRestaurants.add(new Restaurant(1, "Dominos", "410/412 Albany Hwy, Victoria Park WA 6100", R.drawable.dominos));
         allRestaurants.add(new Restaurant(2, "KFC", "252 Abernethy Rd, Belmont WA 6104", R.drawable.kfc));
         allRestaurants.add(new Restaurant(3, "McDonalds", "224 Manning Rd, Karawara WA 6152", R.drawable.maccas));
+        allRestaurants.add(new Restaurant(3, "FAKE McDonalds", "FAKE 224 Manning Rd, Karawara WA 6152", R.drawable.maccas));
+
     }
 
 
@@ -68,7 +70,16 @@ public class RestaurantList {
             {
                 if(definedRestaurant.getId() == loadedRestaurant.getId())
                 {
-                    restaurantFound = true;
+                    if(definedRestaurant.getName().equals(loadedRestaurant.getName()))
+                    {
+                        if(definedRestaurant.getAddress().equals(loadedRestaurant.getAddress()))
+                        {
+                            if(definedRestaurant.getDrawableID() == loadedRestaurant.getDrawableID())
+                            {
+                                restaurantFound = true;
+                            }
+                        }
+                    }
                 }
             }
 
