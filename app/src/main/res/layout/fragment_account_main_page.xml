@@ -50,7 +50,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="31dp"
         android:layout_marginEnd="50dp"
-        android:text="Email"
+        android:text="Password"
         app:layout_constraintEnd_toStartOf="@+id/editTextEmail"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +109,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextFName" />
 
     <Button
-        android:id="@+id/logOutButton"
+        android:id="@+id/logOutMain"
         android:layout_width="68dp"
         android:layout_height="58dp"
         android:layout_marginStart="168dp"
@@ -139,7 +139,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="23dp"
         android:text="Update Details"
-        app:layout_constraintEnd_toStartOf="@+id/logOutButton"
+        app:layout_constraintEnd_toStartOf="@+id/logOutMain"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pass" />
 
@@ -152,7 +152,7 @@
         android:layout_marginEnd="38dp"
         android:text="Order History"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/logOutButton"
+        app:layout_constraintStart_toEndOf="@+id/logOutMain"
         app:layout_constraintTop_toBottomOf="@+id/editTextPass" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
