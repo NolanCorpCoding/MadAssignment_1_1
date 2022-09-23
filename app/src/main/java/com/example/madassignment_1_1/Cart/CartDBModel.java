@@ -30,7 +30,6 @@ public class CartDBModel
         contentValues.put(CartDBSchema.CartTable.Cols.ID, pCart.getId());
         contentValues.put(CartDBSchema.CartTable.Cols.PRICE, pCart.getTotalPrice());
         contentValues.put(CartDBSchema.CartTable.Cols.USERACCOUNTID, pCart.getUserAccountID());
-        contentValues.put(CartDBSchema.CartTable.Cols.RESTAURANTID, pCart.getRestaurantID());
         database.insert(CartDBSchema.CartTable.NAME, null, contentValues);
     }
 
