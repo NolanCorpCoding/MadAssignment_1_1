@@ -140,10 +140,10 @@ public class MealsFrag extends Fragment {
 //                    //THIS IS WHERE THE "ACTION" HAPPENS
 //                }
 //            });
-            Meal meal = mealsList.get(position);
+            Meals meal = mealsList.get(position);
             holder.mealName.setText(meal.getName());
             holder.mealPrice.setText(String.valueOf(meal.getPrice()));
-            holder.img.setImageResource(meal.getDrawableID());
+            holder.img.setImageResource(meal.getDrawableId());
 
             holder.mealNum.setText("0");
             // the number of meals in the cart needs to gotten from the cart i believe
@@ -171,6 +171,7 @@ public class MealsFrag extends Fragment {
         @Override
         public int getItemCount() {
             return data.size();
+            //return 0;
         }
     }
 }
