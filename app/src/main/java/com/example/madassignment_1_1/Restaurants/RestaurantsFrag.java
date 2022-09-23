@@ -16,7 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.madassignment_1_1.Meals.MealsList;
 import com.example.madassignment_1_1.Meals.MealsFrag;
+
 import com.example.madassignment_1_1.R;
 
 /**
@@ -39,7 +41,9 @@ public class RestaurantsFrag extends Fragment {
         // Required empty public constructor
     }
 
-    public RestaurantsFrag(RestaurantList data) {this.resList = data;}
+    public RestaurantsFrag(RestaurantList data) {
+        this.resList = data;
+    }
 
     // TODO: Rename and change types and number of parameters
     public static RestaurantsFrag newInstance(String param1, String param2) {

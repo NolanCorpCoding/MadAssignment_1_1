@@ -6,13 +6,13 @@ public class Meals
 {
     public final int id;
     public String name;
-    public int price;
+    public double price;
     public int restaurantId;
     public final int drawableId;
 
     public static int nextId;
 
-    public Meals(int pId, String pName, int pPrice, int pRestaurantId, int pDrawableId)
+    public Meals(int pId, String pName, double pPrice, int pRestaurantId, int pDrawableId)
     {
         this.id = pId;
         this.name = pName;
@@ -22,7 +22,7 @@ public class Meals
         nextId = pId + 1;
     }
 
-    public Meals(String pName, int pPrice, int pRestaurantId, int pDrawableId)
+    public Meals(String pName, double pPrice, int pRestaurantId, int pDrawableId)
     {
         this(nextId, pName, pPrice, pRestaurantId, pDrawableId); // Delegate to the other constructor
         nextId++;
@@ -36,7 +36,7 @@ public class Meals
         return name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
