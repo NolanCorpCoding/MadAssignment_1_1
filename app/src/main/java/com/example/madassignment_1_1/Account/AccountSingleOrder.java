@@ -126,7 +126,7 @@ public class AccountSingleOrder extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull AccountOrderHistory.OrderViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull AccountSingleOrder.SingleOrderViewHolder holder, int position) {
             Restaurant restaurant = resList.get(position);
             holder.img.setImageResource(restaurant.getDrawableID());
             holder.textName.setText(restaurant.getName());
@@ -135,10 +135,10 @@ public class AccountSingleOrder extends Fragment {
             holder.img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "clicked menu item", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(view.getContext(), "clicked menu item", Toast.LENGTH_SHORT).show();
                     //THIS IS WHERE THE "ACTION" HAPPENS
-                    fm.beginTransaction().remove(thisFrag).commit();
-                    fm.beginTransaction().add(R.id.frameLayout, new AccountSingleOrder()).commit();
+                    //fm.beginTransaction().remove(thisFrag).commit();
+                    //fm.beginTransaction().add(R.id.frameLayout, new AccountSingleOrder()).commit();
                 }
             });
         }
