@@ -22,6 +22,8 @@ import com.example.madassignment_1_1.Meals.MealsFrag;
 import com.example.madassignment_1_1.Meals.MealsList;
 import com.example.madassignment_1_1.R;
 
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link LandingPageFrag#newInstance} factory method to
@@ -41,7 +43,7 @@ public class LandingPageFrag extends Fragment {
     private Button checkOutButton;
     private LandingPageFrag thisFrag;
 
-    private MealsList mealsList;
+    private List<Meals> mealsList;
 
     public LandingPageFrag() {
         // Required empty public constructor
@@ -73,9 +75,9 @@ public class LandingPageFrag extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         thisFrag = this;
-        mealsList = new MealsOfTheDay(getContext());
-        // do something like this to get random meals
-        // or call a method from another class (probably better)
+        MealsList actualMealsList = new MealsList(getContext());
+        mealsList = actualMealsList.getRandomMeals();
+
     }
 
         @Override
@@ -132,9 +134,9 @@ public class LandingPageFrag extends Fragment {
 
         public class MealDayAdapter extends RecyclerView.Adapter<MealDayViewHolder> {
 
-            MealsList data;
+            List<Meals> data;
 
-            public MealDayAdapter(MealsList data){
+            public MealDayAdapter(List<Meals> data){
                 this.data = data;
             }
 
