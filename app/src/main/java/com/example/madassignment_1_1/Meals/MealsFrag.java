@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,7 +18,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.madassignment_1_1.Account.AccountFrag;
+import com.example.madassignment_1_1.Cart.Cart;
 import com.example.madassignment_1_1.Cart.CartFrag;
+import com.example.madassignment_1_1.Cart.CartList;
+import com.example.madassignment_1_1.CartMenuItem.CartMenuItem;
 import com.example.madassignment_1_1.R;
 import com.example.madassignment_1_1.Restaurants.Restaurant;
 import com.example.madassignment_1_1.Restaurants.RestaurantList;
@@ -44,6 +49,8 @@ public class MealsFrag extends Fragment {
     private Button checkOutButton;
 
     private MealsFrag thisFrag;
+
+    private CartList cartList;
 
 
     public MealsFrag() {
@@ -77,7 +84,12 @@ public class MealsFrag extends Fragment {
         }
 
         thisFrag = this;
+
+        cartList = new CartList();
+        cartList.load(getContext());
+
         mealsList = new MealsList(getContext());
+        mealsList.load(getContext());
 
     }
 
@@ -116,6 +128,7 @@ public class MealsFrag extends Fragment {
         ImageView img;
         Button plus;
         Button minus;
+        Button checkout;
 
         public MealViewHolder(@NonNull View itemView, ViewGroup parent) {
             super(itemView);
@@ -125,6 +138,7 @@ public class MealsFrag extends Fragment {
             img = itemView.findViewById(R.id.imgMealIcon);
             plus = itemView.findViewById(R.id.plusButton);
             minus = itemView.findViewById(R.id.minusButton);
+            checkout = itemView.findViewById(R.id.checkOutButton);
 
         }
     }
@@ -171,36 +185,99 @@ public class MealsFrag extends Fragment {
             holder.mealPrice.setText(String.valueOf(meal.getPrice()));
             holder.img.setImageResource(meal.getDrawableId());
 
-            holder.mealNum.setText("0");
+
+            try {
+                int currentCartId = AccountFrag.returnDetails().getCurrentCartId();
+
+                int quantityShow = cartList.getCartMealItem(currentCartId, meal.getId()).getQuantity();
+                holder.mealNum.setText(String.valueOf(quantityShow));
+            }
+            catch(NullPointerException e)
+            {
+                holder.mealNum.setText("0");
+            }
+
             // the number of meals in the cart needs to gotten from the cart i believe
 
             holder.plus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // need to update database here ***********************************
-                    holder.mealNum.setText( Double.toString(Double.parseDouble(holder.mealNum.getText().toString()) + 1));
+                    try {
+                        int quantity = Integer.valueOf(holder.mealNum.getText().toString()) + 1;
+                        int currentCartId = AccountFrag.returnDetails().getCurrentCartId();
+                        Cart currCart = cartList.getCart(currentCartId);
 
-                    int mealID = meal.getId();
-//                    int cartID = ;
-                    double quantity = Double.parseDouble(holder.mealNum.toString());
-                    // this is probably a dumb way of doing this for now, add a dedicated variable somewhere later
+                        cartList.addMeal(currCart, meal, quantity, getActivity());
+
+                        holder.mealNum.setText(String.valueOf(quantity));
+
+
+                        Toast.makeText(view.getContext(), "Current cart price = " + currCart.getTotalPrice(), Toast.LENGTH_LONG).show();
+
+//                        Log.d("CHECK", "MENU ITEM LIST FOR CART " + currCart.getId());
+//                        for(CartMenuItem itemCart : currCart.getMenuItemList())
+//                        {
+//                            if(currCart.getId() == itemCart.getCartID())
+//                            {
+//                                Meals menuItem = cartList.getMeal(itemCart.getMenuItemID());
+//                                Log.d("CHECK", "Item id: " + menuItem.getId() + "  name: " + menuItem.getName() + "  quantity: " + itemCart.getQuantity());
+//                            }
+//                        }
+//
+//                        cartList.printAllCartMenuItem();
+                    }
+                    catch (NullPointerException e)
+                    {
+                        Toast.makeText(view.getContext(), "Go log into your account to add to your cart", Toast.LENGTH_LONG).show();
+                        //link to account sign up/in page
+                    }
+
                 }
             });
 
             holder.minus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    if (Double.parseDouble(holder.mealNum.getText().toString()) >= 1.0)
+                    int requestedQuantity = Integer.valueOf(holder.mealNum.getText().toString()) - 1;
+                    if(requestedQuantity >= 0)
                     {
-                        holder.mealNum.setText( Double.toString(Double.parseDouble(holder.mealNum.getText().toString()) - 1));
-                        // need to update database here ***********************************
-                        // this is probably a dumb way of doing this for now, add a dedicated variable somewhere later
+
+                        int quantity = requestedQuantity;
+                        int currentCartId = AccountFrag.returnDetails().getCurrentCartId();
+                        Cart currCart = cartList.getCart(currentCartId);
+
+                        cartList.addMeal(currCart, meal, quantity, getActivity());
+
+                        holder.mealNum.setText(String.valueOf(quantity));
+
+                        Toast.makeText(view.getContext(), "Current cart price = " + currCart.getTotalPrice(), Toast.LENGTH_LONG).show();
+
+                        Log.d("CHECK", "MENU ITEM LIST FOR CART " + currCart.getId());
+                        for(CartMenuItem itemCart : currCart.getMenuItemList())
+                        {
+                            if(currCart.getId() == itemCart.getCartID())
+                            {
+                                Meals menuItem = cartList.getMeal(itemCart.getMenuItemID());
+                                Log.d("CHECK", "Item id: " + menuItem.getId() + "  name: " + menuItem.getName() + "  quantity: " + itemCart.getQuantity());
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Toast.makeText(view.getContext(), "Can't have less than 0 meals...", Toast.LENGTH_LONG).show();
                     }
 
-                   
-                }
+                    // this is probably a dumb way of doing this for now, add a dedicated variable somewhere later
+                 }
             });
+
+//            holder.checkout.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Toast.makeText(view.getContext(), "WORKING", Toast.LENGTH_LONG).show();
+//                }
+//            });
 
         }
 

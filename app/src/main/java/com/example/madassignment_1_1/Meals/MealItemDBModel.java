@@ -124,4 +124,19 @@ public class MealItemDBModel
         }
         return mealItemID;
     }
+
+    public Meals findMeal(int id)
+    {
+        Meals meal = null;
+
+        for(Meals currMeal : getAllMealItems())
+        {
+            if(id == currMeal.getId())
+            {
+                meal = currMeal;
+            }
+        }
+
+        return meal;
+    }
 }

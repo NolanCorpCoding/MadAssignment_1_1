@@ -44,20 +44,6 @@ public class MealsList {
             Log.d("DEBUG", "MEAL: id:" + meal.getId() + " name:" + meal.getName() + " price:" + meal.getPrice() + " restaurantid:" + meal.getRestaurantId());
         }
 
-//        if(mealItemDBModel.getNumTuples() <= 0)
-//        {
-//            Log.d("DEBUG", "CREATING NEW USERS");
-//            restaurantsMeals.DominosMeals();
-//
-//        }
-//        else
-//        {
-//            useraccountDBModel.getId("jamescarey@gmail.com", "jamescareypassword");
-//            useraccountDBModel.getId("angusbrayshaw@htomail.com", "angusbrayshawpassword");
-//            useraccountDBModel.getId("jacktyson@outlook.com", "jacktysonpassword");
-//        }
-        Log.d("DEBUG", "FINISHED LOADING DB");
-
     }
 
     public MealsList(Context pContext) {
@@ -113,6 +99,4 @@ public class MealsList {
             mealFound = false;
         }
     }
-
-
 }

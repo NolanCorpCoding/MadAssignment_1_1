@@ -18,6 +18,7 @@ public class UserAccountDBCursor extends CursorWrapper
         String lastname = getString(getColumnIndex(UserAccountTable.Cols.LASTNAME));
         String email = getString(getColumnIndex(UserAccountTable.Cols.EMAIL));
         String pass = getString(getColumnIndex(UserAccountTable.Cols.PASS));
-        return new UserAccount(id,firstname,lastname, email, pass);
+        int cartId = getInt(getColumnIndex(UserAccountTable.Cols.CURRENTCARTID));
+        return new UserAccount(id,firstname,lastname, email, pass, cartId);
     }
 }
