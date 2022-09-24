@@ -26,7 +26,7 @@
         />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/payButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="121dp"
@@ -34,16 +34,16 @@
         android:layout_marginEnd="56dp"
         android:text="Pay"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/cartTotal"
         app:layout_constraintTop_toBottomOf="@+id/rvCart" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/cartTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="161dp"
-        android:text="TextView"
+        android:text="$50.0"
         app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/rvCart" />
 
@@ -54,8 +54,8 @@
         android:layout_marginStart="19dp"
         android:layout_marginTop="161dp"
         android:layout_marginEnd="5dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/textView5"
+        android:text="Car total:"
+        app:layout_constraintEnd_toStartOf="@+id/cartTotal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvCart" />
 
