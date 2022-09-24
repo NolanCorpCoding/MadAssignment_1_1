@@ -190,9 +190,15 @@ public class MealsFrag extends Fragment {
             holder.minus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // need to update database here ***********************************
-                    holder.mealNum.setText( Double.toString(Double.parseDouble(holder.mealNum.getText().toString()) - 1));
-                    // this is probably a dumb way of doing this for now, add a dedicated variable somewhere later
+
+                    if (Double.parseDouble(holder.mealNum.getText().toString()) >= 1.0)
+                    {
+                        holder.mealNum.setText( Double.toString(Double.parseDouble(holder.mealNum.getText().toString()) - 1));
+                        // need to update database here ***********************************
+                        // this is probably a dumb way of doing this for now, add a dedicated variable somewhere later
+                    }
+
+                   
                 }
             });
 
