@@ -8,7 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
+import com.example.madassignment_1_1.CartMenuItem.CartMenuItem;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class CartDBModel
 {
@@ -45,6 +48,27 @@ public class CartDBModel
     {
         ArrayList<Cart> cartList = new ArrayList<>();
         Cursor cursor = database.query(CartDBSchema.CartTable.NAME,null,null,null,null,null,null);
+        CartDBCursor cartDBCursor = new CartDBCursor(cursor);
+
+        try {
+            cartDBCursor.moveToFirst();
+            while(!cartDBCursor.isAfterLast())
+            {
+                cartList.add(cartDBCursor.getCart());
+                cartDBCursor.moveToNext();
+            }
+        }
+        finally {
+            cursor.close();
+        }
+
+        return cartList;
+    }
+
+    public List<Cart> getUserCarts(int userID){
+        List<Cart> cartList = new ArrayList<>();
+
+        Cursor cursor = database.query(CartDBSchema.CartTable.NAME,null,CartDBSchema.CartTable.Cols.USERACCOUNTID + " = " + userID,null,null,null,null);
         CartDBCursor cartDBCursor = new CartDBCursor(cursor);
 
         try {

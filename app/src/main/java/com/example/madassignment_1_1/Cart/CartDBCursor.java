@@ -3,6 +3,9 @@ package com.example.madassignment_1_1.Cart;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
+import com.example.madassignment_1_1.CartMenuItem.CartMealItemDBSchema;
+import com.example.madassignment_1_1.CartMenuItem.CartMenuItem;
+
 public class CartDBCursor extends CursorWrapper
 {
     public CartDBCursor(Cursor cursor) { super(cursor); }

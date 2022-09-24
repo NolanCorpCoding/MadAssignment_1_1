@@ -9,7 +9,10 @@ import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
 
+import com.example.madassignment_1_1.Cart.Cart;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserAccountDBModel
 {

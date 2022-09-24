@@ -7,9 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.view.MenuItem;
 
 import com.example.madassignment_1_1.Cart.Cart;
+import com.example.madassignment_1_1.Cart.CartDBCursor;
+import com.example.madassignment_1_1.Cart.CartDBSchema;
 import com.example.madassignment_1_1.Meals.Meals;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CartMenuItemDBModel
 {
@@ -47,6 +50,27 @@ public class CartMenuItemDBModel
     {
         ArrayList<CartMenuItem> cartMenuItemList = new ArrayList<>();
         Cursor cursor = database.query(CartMealItemDBSchema.CartMealItemTable.NAME,null,null,null,null,null,null);
+        CartMenuItemDBCursor cartMenuItemDBCursor = new CartMenuItemDBCursor(cursor);
+
+        try {
+            cartMenuItemDBCursor.moveToFirst();
+            while(!cartMenuItemDBCursor.isAfterLast())
+            {
+                cartMenuItemList.add(cartMenuItemDBCursor.getCartMenuItem());
+                cartMenuItemDBCursor.moveToNext();
+            }
+        }
+        finally {
+            cursor.close();
+        }
+
+        return cartMenuItemList;
+    }
+
+    public ArrayList<CartMenuItem> getAllMealsFromCart(int cartID)
+    {
+        ArrayList<CartMenuItem> cartMenuItemList = new ArrayList<>();
+        Cursor cursor = database.query(CartMealItemDBSchema.CartMealItemTable.NAME,null,CartMealItemDBSchema.CartMealItemTable.Cols.CARTID + " = " + cartID,null,null,null,null);
         CartMenuItemDBCursor cartMenuItemDBCursor = new CartMenuItemDBCursor(cursor);
 
         try {

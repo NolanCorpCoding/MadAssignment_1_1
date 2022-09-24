@@ -16,11 +16,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.madassignment_1_1.Cart.Cart;
+import com.example.madassignment_1_1.Cart.CartDBModel;
 import com.example.madassignment_1_1.Meals.MealsFrag;
 import com.example.madassignment_1_1.R;
 import com.example.madassignment_1_1.Restaurants.Restaurant;
 import com.example.madassignment_1_1.Restaurants.RestaurantList;
 import com.example.madassignment_1_1.Restaurants.RestaurantsFrag;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,6 +44,9 @@ public class AccountOrderHistory extends Fragment {
 
     private AccountOrderHistory thisFrag = this;
     private FragmentManager fm = getParentFragmentManager();
+
+
+    private List<Cart> orderHistory;
 
     public AccountOrderHistory() {
         // Required empty public constructor
