@@ -45,6 +45,7 @@ public class MealsFrag extends Fragment {
 
     private MealsFrag thisFrag;
 
+
     public MealsFrag() {
         // Required empty public constructor
     }
@@ -176,8 +177,12 @@ public class MealsFrag extends Fragment {
             holder.plus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // need to update database here
+                    // need to update database here ***********************************
                     holder.mealNum.setText( Double.toString(Double.parseDouble(holder.mealNum.getText().toString()) + 1));
+
+                    int mealID = meal.getId();
+//                    int cartID = ;
+                    double quantity = Double.parseDouble(holder.mealNum.toString());
                     // this is probably a dumb way of doing this for now, add a dedicated variable somewhere later
                 }
             });
@@ -185,7 +190,7 @@ public class MealsFrag extends Fragment {
             holder.minus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // need to update database here
+                    // need to update database here ***********************************
                     holder.mealNum.setText( Double.toString(Double.parseDouble(holder.mealNum.getText().toString()) - 1));
                     // this is probably a dumb way of doing this for now, add a dedicated variable somewhere later
                 }

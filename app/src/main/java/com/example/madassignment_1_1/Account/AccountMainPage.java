@@ -117,7 +117,8 @@ public class AccountMainPage extends Fragment {
                 String lNameText = lName.getText().toString();
                 String emailText = email.getText().toString();
                 String passText = pass.getText().toString();
-                AccountFrag.setDetails(fNameText, lNameText, emailText, passText);
+
+                AccountFrag.updateDetails(fNameText, lNameText, emailText, passText);
             }
         });
 

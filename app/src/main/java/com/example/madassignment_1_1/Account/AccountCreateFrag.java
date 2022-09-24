@@ -20,7 +20,7 @@ import com.example.madassignment_1_1.R;
  */
 public class AccountCreateFrag extends Fragment {
 
-
+    private UserAccountList useracctList;
     private EditText fName;
     private EditText lName;
     private EditText email;
@@ -53,9 +53,11 @@ public class AccountCreateFrag extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (getArguments() != null) { }
 
-        }
+        useracctList = new UserAccountList();
+        useracctList.load(getActivity());
+
     }
 
     @Override
@@ -90,7 +92,9 @@ public class AccountCreateFrag extends Fragment {
                 String lNameText = lName.getText().toString();
                 String emailText = email.getText().toString();
                 String passText = pass.getText().toString();
-                AccountFrag.setDetails(fNameText, lNameText, emailText, passText);
+
+                UserAccount tempAccount = useracctList.findUser(fNameText, lNameText, emailText, passText);
+                AccountFrag.setDetails(tempAccount);
 
                 fm.beginTransaction().remove(thisFrag).commit();
                 //fragCurrent = fragRes;
