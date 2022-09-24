@@ -24,46 +24,48 @@ import com.example.madassignment_1_1.Restaurants.RestaurantsFrag;
 
 public class AccountFrag extends Fragment {
 
-//    // TODO: Rename parameter arguments, choose names that match
-//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-//
-//    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
-
     private UserAccountList useracctList;
     private TextView title;
     private RecyclerView rv;
     private LinearLayoutManager rvLayout;
 
-    private static String currFName;
-    private static String currLName;
-    private static String currEmail;
-    private static String currPass;
+    private static UserAccount loggedInUserAccount;
 
-    public static void setDetails(String fName, String lName, String email, String pass){
-        currFName = fName;
-        currLName = lName;
-        currEmail = email;
-        currPass = pass;
+    public static void setDetails(UserAccount pUserAccount){
+        loggedInUserAccount = pUserAccount;
+    }
+
+    public static void updateDetails(String pFirstname, String pLastname, String pEmail, String pPass)
+    {
+        loggedInUserAccount.updateFirstname(pFirstname);
+        loggedInUserAccount.updateLastname(pLastname);
+        loggedInUserAccount.updateEmail(pEmail);
+        loggedInUserAccount.updatePass(pPass);
+    }
+
+    public static UserAccount returnDetails()
+    {
+        return loggedInUserAccount;
+    }
+
+
+    public static void loggoutAccount()
+    {
+        loggedInUserAccount = null;
     }
 
     public static String getFName(){
-        return currFName;
+        return loggedInUserAccount.getFirstname();
     }
 
     public static String getLName(){
-        return currLName;
+        return loggedInUserAccount.getLastname();
     }
 
-    public static String getEmail(){
-        return currEmail;
-    }
+    public static String getEmail(){ return loggedInUserAccount.getEmail(); }
 
     public static String getPass(){
-        return currPass;
+        return loggedInUserAccount.getPass();
     }
 
 

@@ -15,6 +15,8 @@
         <entry key="..\:/Users/Sam/Desktop/MAD/MadAssignment_1_1/app/src/main/res/layout/order_entry.xml" value="0.2984375" />
         <entry key="..\:/Users/Sam/Desktop/MAD/MadAssignment_1_1/app/src/main/res/layout/orderhistoryentry.xml" value="0.40217391304347827" />
         <entry key="..\:/Users/Sam/Desktop/MAD/MadAssignment_1_1/app/src/main/res/layout/restaurant_entry.xml" value="0.40217391304347827" />
+        <entry key="..\:/Users/tobes/OneDrive/Curtin University/2022 Sem 2/Mobile App Development/Assignment 1/MadAssignment_1_1/app/src/main/res/layout/fragment_account_create.xml" value="0.55" />
+        <entry key="..\:/Users/tobes/OneDrive/Curtin University/2022 Sem 2/Mobile App Development/Assignment 1/MadAssignment_1_1/app/src/main/res/layout/fragment_account_log_in.xml" value="0.55" />
         <entry key="..\:/Users/tobes/OneDrive/Curtin University/2022 Sem 2/Mobile App Development/Assignment 1/MadAssignment_1_1/app/src/main/res/layout/fragment_food.xml" value="0.2966485507246377" />
         <entry key="..\:/Users/tobes/OneDrive/Curtin University/2022 Sem 2/Mobile App Development/Assignment 1/MadAssignment_1_1/app/src/main/res/layout/fragment_restaurants.xml" value="0.2674772036474164" />
         <entry key="..\:/Users/tobes/OneDrive/Curtin University/2022 Sem 2/Mobile App Development/Assignment 1/MadAssignment_1_1/app/src/main/res/layout/meal_entry.xml" value="0.36" />
@@ -22,5 +24,5 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

@@ -2,6 +2,8 @@ package com.example.madassignment_1_1.Account;
 
 import android.util.Log;
 
+import com.example.madassignment_1_1.Cart.Cart;
+
 import java.util.ArrayList;
 
 public class UserAccount
@@ -13,8 +15,13 @@ public class UserAccount
     private String lastname;
     private String email;
     private String pass;
-//    private Cart currentCart;
-//    private ArrayList<Cart> previousCarts;
+    private Cart currentCart;
+    private ArrayList<Cart> previousCarts;
+
+    public static void resetAutoNextId()
+    {
+        autoNextId = 0;
+    }
 
 
     public UserAccount(int pId, String pFirstname, String pLastname, String pEmail, String pPass)
@@ -61,15 +68,26 @@ public class UserAccount
 
     public String getPass() { return this.pass; }
 
-    public void setFirstname(String pFirstname)
+    public void updateFirstname(String pFirstName)
     {
-        this.firstname = pFirstname;
+        this.firstname = pFirstName;
     }
 
-    public void setLastname(String pLastname)
+    public void updateLastname(String pLastName)
     {
-        this.firstname = pLastname;
+        this.lastname = pLastName;
     }
+
+    public void updateEmail(String pEmail)
+    {
+        this.email = pEmail;
+    }
+
+    public void updatePass(String pPass) { this.pass = pPass; }
+
+    public Cart getCurrentCart() { return currentCart; }
+
+    public ArrayList<Cart> getPreviousCarts() { return previousCarts; }
 
     public void setEmail(String pEmail)
     {

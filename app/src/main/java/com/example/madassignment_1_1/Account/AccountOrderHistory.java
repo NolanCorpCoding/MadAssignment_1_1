@@ -128,10 +128,10 @@ public class AccountOrderHistory extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull AccountOrderHistory.OrderViewHolder holder, int position) {
-            Restaurant restaurant = resList.get(position);
-            holder.img.setImageResource(restaurant.getDrawableID());
-            holder.textName.setText(restaurant.getName());
-            holder.textAddress.setText(restaurant.getAddress());
+//            Restaurant restaurant = resList.get(position);
+//            holder.img.setImageResource(restaurant.getDrawableID());
+//            holder.textName.setText(restaurant.getName());
+//            holder.textAddress.setText(restaurant.getAddress());
 
             holder.img.setOnClickListener(new View.OnClickListener() {
                 @Override

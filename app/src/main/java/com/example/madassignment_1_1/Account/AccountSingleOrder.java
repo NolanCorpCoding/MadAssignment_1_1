@@ -78,8 +78,8 @@ public class AccountSingleOrder extends Fragment {
         View view = inflater.inflate(R.layout.fragment_account_single_order, container, false);
         RecyclerView rv = view.findViewById(R.id.rvSingleOrder);
         rv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        RestaurantsFrag.RestaurantAdapter adapter = new RestaurantsFrag.RestaurantAdapter(resList);
-        rv.setAdapter(adapter);
+//        RestaurantsFrag.RestaurantAdapter adapter = new RestaurantsFrag.RestaurantAdapter(resList);
+//        rv.setAdapter(adapter);
         return view;
     }
 
@@ -127,10 +127,10 @@ public class AccountSingleOrder extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull AccountSingleOrder.SingleOrderViewHolder holder, int position) {
-            Restaurant restaurant = resList.get(position);
-            holder.img.setImageResource(restaurant.getDrawableID());
-            holder.textName.setText(restaurant.getName());
-            holder.textAddress.setText(restaurant.getAddress());
+//            Restaurant restaurant = resList.get(position);
+//            holder.img.setImageResource(restaurant.getDrawableID());
+//            holder.textName.setText(restaurant.getName());
+//            holder.textAddress.setText(restaurant.getAddress());
 
             holder.img.setOnClickListener(new View.OnClickListener() {
                 @Override

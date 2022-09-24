@@ -15,7 +15,7 @@ public class MealItemDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase)
     {
-        sqLiteDatabase.execSQL("create table "+ MealItemDBSchema.MealsTable.NAME+"("+ MealItemDBSchema.MealsTable.Cols.ID+" INT, "+ MealItemDBSchema.MealsTable.Cols.NAME+" TEXT,  "+ MealItemDBSchema.MealsTable.Cols.PRICE+" REAL,  "+ MealItemDBSchema.MealsTable.Cols.RESTAURANTID+ " INT, " + MealItemDBSchema.MealsTable.Cols.DRAWABLEREFERENCE + " INT);");
+        sqLiteDatabase.execSQL("create table "+ MealItemDBSchema.MealsTable.NAME+"("+ MealItemDBSchema.MealsTable.Cols.ID+" INT PRIMARY KEY, "+ MealItemDBSchema.MealsTable.Cols.NAME+" TEXT,  "+ MealItemDBSchema.MealsTable.Cols.PRICE+" REAL,  "+ MealItemDBSchema.MealsTable.Cols.RESTAURANTID+ " INT, " + MealItemDBSchema.MealsTable.Cols.DRAWABLEREFERENCE + " INT);");
     }
 
     @Override
