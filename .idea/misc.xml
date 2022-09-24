@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Sam/Desktop/MAD/MadAssignment_1_1/app/src/main/res/layout-sw600dp/fragment_account_main_page.xml" value="0.224609375" />
+        <entry key="..\:/Users/Sam/Desktop/MAD/MadAssignment_1_1/app/src/main/res/layout/fragment_account_main_page.xml" value="0.25" />
         <entry key="..\:/Users/Sam/Desktop/MAD/MadAssignment_1_1/app/src/main/res/layout/fragment_account_order_history.xml" value="0.40217391304347827" />
         <entry key="..\:/Users/Sam/Desktop/MAD/MadAssignment_1_1/app/src/main/res/layout/fragment_account_single_order.xml" value="0.40217391304347827" />
         <entry key="..\:/Users/Sam/Desktop/MAD/MadAssignment_1_1/app/src/main/res/layout/fragment_cart.xml" value="0.2994791666666667" />

@@ -80,13 +80,10 @@ public class AccountOrderHistory extends Fragment {
         View view = inflater.inflate(R.layout.fragment_account_order_history, container, false);
         RecyclerView rv = view.findViewById(R.id.rvOrders);
         rv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        RestaurantsFrag.RestaurantAdapter adapter = new RestaurantsFrag.RestaurantAdapter(resList);
+        OrderAdapter adapter = new OrderAdapter(resList);
         rv.setAdapter(adapter);
         return view;
     }
-
-
-
 
 
 
