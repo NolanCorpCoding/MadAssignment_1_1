@@ -120,7 +120,7 @@ public class AccountSingleOrder extends Fragment {
         public AccountSingleOrder.SingleOrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             Log.d("adapter: ", "on create view");
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-            View view = layoutInflater.inflate(R.layout.orderhistoryentry,parent,false);
+            View view = layoutInflater.inflate(R.layout.order_entry,parent,false);
             AccountSingleOrder.SingleOrderViewHolder myViewHolder = new AccountSingleOrder.SingleOrderViewHolder(view, parent);
             return myViewHolder;
         }
