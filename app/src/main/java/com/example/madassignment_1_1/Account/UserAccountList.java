@@ -26,9 +26,9 @@ public class UserAccountList {
         }
         else
         {
-            useraccountDBModel.getId("jamescarey@gmail.com", "jamescareypassword");
-            useraccountDBModel.getId("angusbrayshaw@htomail.com", "angusbrayshawpassword");
-            useraccountDBModel.getId("jacktyson@outlook.com", "jacktysonpassword");
+//            useraccountDBModel.getId("jamescarey@gmail.com", "jamescareypassword");
+//            useraccountDBModel.getId("angusbrayshaw@htomail.com", "angusbrayshawpassword");
+//            useraccountDBModel.getId("jacktyson@outlook.com", "jacktysonpassword");
         }
         Log.d("DEBUG", "FINISHED LOADING DB");
 
@@ -36,9 +36,9 @@ public class UserAccountList {
 
     private void addUsers()
     {
-        useraccountDBModel.addRestaurant(new UserAccount(1, "James", "Carey", "jamescarey@gmail.com", "jamescareypassword"));
-        useraccountDBModel.addRestaurant(new UserAccount(2, "Angus", "Brayshaw", "angusbrayshaw@htomail.com", "angusbrayshawpassword"));
-        useraccountDBModel.addRestaurant(new UserAccount(3, "Jack", "Tyson", "jacktyson@outlook.com", "jacktysonpassword"));
+//        useraccountDBModel.addRestaurant(new UserAccount(1, "James", "Carey", "jamescarey@gmail.com", "jamescareypassword"));
+//        useraccountDBModel.addRestaurant(new UserAccount(2, "Angus", "Brayshaw", "angusbrayshaw@htomail.com", "angusbrayshawpassword"));
+//        useraccountDBModel.addRestaurant(new UserAccount(3, "Jack", "Tyson", "jacktyson@outlook.com", "jacktysonpassword"));
     }
 
 

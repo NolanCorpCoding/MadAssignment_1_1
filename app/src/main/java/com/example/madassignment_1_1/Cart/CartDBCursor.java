@@ -12,6 +12,6 @@ public class CartDBCursor extends CursorWrapper
         double price = getDouble(getColumnIndex(CartDBSchema.CartTable.Cols.PRICE));
         int userAccountID = getInt(getColumnIndex(CartDBSchema.CartTable.Cols.USERACCOUNTID));
         String orderTime = getString(getColumnIndex(CartDBSchema.CartTable.Cols.ORDERTIME));
-        return new Cart(id, price, userAccountID, orderTime);
+        return new Cart(price, userAccountID, orderTime);
     }
 }

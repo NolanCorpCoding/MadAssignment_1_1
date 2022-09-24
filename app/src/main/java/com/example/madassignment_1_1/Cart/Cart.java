@@ -10,19 +10,22 @@ public class Cart {
 
     public static int autoNextID = 0;
 
-    public Cart(int pId, double pTotalPrice, int pUserAccountID, String pOrderTime)
-    {
-        this.id = pId;
-        this.totalPrice = pTotalPrice;
-        this.userAccountID = pUserAccountID;
-        this.orderTime = pOrderTime;
-
-        autoNextID = id + 1;
-    }
+//    public Cart(int pId, double pTotalPrice, int pUserAccountID, String pOrderTime)
+//    {
+//        this.id = pId;
+//        this.totalPrice = pTotalPrice;
+//        this.userAccountID = pUserAccountID;
+//        this.orderTime = pOrderTime;
+//
+//        autoNextID = id + 1;
+//    }
 
     public Cart(double pTotalPrice, int pUserAccountID, String pOrderTime)
     {
-        this(autoNextID, pTotalPrice, pUserAccountID, pOrderTime);
+        this.id = autoNextID;
+        this.totalPrice = pTotalPrice;
+        this.userAccountID = pUserAccountID;
+        this.orderTime = pOrderTime;
 
         autoNextID++;
     }

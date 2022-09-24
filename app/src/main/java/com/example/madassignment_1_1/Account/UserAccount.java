@@ -17,7 +17,7 @@ public class UserAccount
 //    private ArrayList<Cart> previousCarts;
 
 
-    public UserAccount(int pId, String pFirstname, String pLastname, String pEmail, String pPass)
+/*    public UserAccount(int pId, String pFirstname, String pLastname, String pEmail, String pPass)
     {
         this.id = pId;
         this.firstname = pFirstname;
@@ -26,7 +26,7 @@ public class UserAccount
         this.pass = pPass;
 
         autoNextId = id + 1;
-    }
+    }*/
 
     public UserAccount(String pFirstname, String pLastname, String pEmail, String pPass)
     {

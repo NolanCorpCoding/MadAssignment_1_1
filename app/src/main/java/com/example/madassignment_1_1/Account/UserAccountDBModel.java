@@ -90,7 +90,9 @@ public class UserAccountDBModel
         int userAccountID = -1;
 
         Cursor cursor = database.query(UserAccountDBSchema.UserAccountTable.NAME, null,
-                UserAccountDBSchema.UserAccountTable.Cols.EMAIL + " = ? AND " + UserAccountDBSchema.UserAccountTable.Cols.PASS + " = ?",new String[] {userAccountEmail, userAccountPassword},null,null,null);
+                UserAccountDBSchema.UserAccountTable.Cols.EMAIL + " = ? AND " + UserAccountDBSchema.UserAccountTable.Cols.PASS + " = ?",new String[] {userAccountEmail, userAccountPassword},null,
+                null,
+                null);
         UserAccountDBCursor useraccountDBCursor = new UserAccountDBCursor(cursor);
 
         try{
@@ -107,7 +109,7 @@ public class UserAccountDBModel
         }
         catch(SQLiteException e)
         {
-            Log.d("WHILE LOOP ERROR", "ERROR: " + e.getCause() + " ... " + e.getLocalizedMessage());
+            Log.d("SQLite Exception ERROR", "ERROR: " + e.getCause() + " ... " + e.getLocalizedMessage());
         }
         finally {
             cursor.close();
