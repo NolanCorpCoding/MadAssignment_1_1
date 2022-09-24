@@ -93,14 +93,16 @@ public class AccountOrderHistory extends Fragment {
 
     public class OrderViewHolder extends RecyclerView.ViewHolder {
         TextView textName;
-        TextView textAddress;
+        TextView textNum;
+        TextView textPrice;
         ImageView img;
 
         public OrderViewHolder(@NonNull View itemView, ViewGroup parent) {
             super(itemView);
-            textName = itemView.findViewById(R.id.resName);
-            textAddress = itemView.findViewById(R.id.resAddr);
-            img = itemView.findViewById(R.id.imgResIcon);
+            textName = itemView.findViewById(R.id.mealName);
+            textNum = itemView.findViewById(R.id.mealNum);
+            textPrice = itemView.findViewById(R.id.mealPrice);
+            img = itemView.findViewById(R.id.imgMealIcon);
 
         }
     }
@@ -140,7 +142,7 @@ public class AccountOrderHistory extends Fragment {
                     Toast.makeText(view.getContext(), "clicked menu item", Toast.LENGTH_SHORT).show();
                     //THIS IS WHERE THE "ACTION" HAPPENS
                     fm.beginTransaction().remove(thisFrag).commit();
-                    fm.beginTransaction().add(R.id.frameLayout, new MealsFrag()).commit();
+                    fm.beginTransaction().add(R.id.frameLayout, new AccountSingleOrder()).commit();
                 }
             });
         }
