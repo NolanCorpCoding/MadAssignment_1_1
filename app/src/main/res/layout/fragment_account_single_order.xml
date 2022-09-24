@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Meals.MealsFrag">
+    tools:context=".Account.AccountSingleOrder">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -14,7 +14,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:textSize="40dp"
         android:id="@+id/accTitle"
-        android:text="Meals"
+        android:text="Order num on date"
         />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -22,7 +22,7 @@
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/accTitle"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:id="@+id/rvFood"
+        android:id="@+id/rvSingleOrder"
         />
 
     <Button
@@ -32,9 +32,9 @@
         android:layout_marginStart="158dp"
         android:layout_marginTop="43dp"
         android:layout_marginEnd="159dp"
-        android:text="Check out"
+        android:text="Okay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvFood" />
+        app:layout_constraintTop_toBottomOf="@+id/rvSingleOrder" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

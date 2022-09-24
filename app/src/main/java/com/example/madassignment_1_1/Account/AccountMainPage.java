@@ -3,12 +3,14 @@ package com.example.madassignment_1_1.Account;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.madassignment_1_1.R;
 
@@ -33,12 +35,18 @@ public class AccountMainPage extends Fragment {
     private String emailText;
     private String passText;
 
+    private TextView title;
+
     private EditText fName;
     private EditText lName;
     private EditText email;
     private EditText pass;
 
     private Button updateDetails;
+    private Button logOut;
+    private Button orderHist;
+
+    private AccountMainPage thisFrag = this;
 
 
 
@@ -80,16 +88,26 @@ public class AccountMainPage extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_account_main_page, container, false);
 
+        FragmentManager fm = getParentFragmentManager();
+
         fName = (EditText) view.findViewById(R.id.editTextFName);
         lName = (EditText) view.findViewById(R.id.editTextLName);
         email = (EditText) view.findViewById(R.id.editTextEmail);
         pass = (EditText) view.findViewById(R.id.editTextPass);
+
         updateDetails = (Button) view.findViewById(R.id.updateButton);
+        logOut = (Button) view.findViewById(R.id.logOutMain);
+        orderHist = (Button) view.findViewById(R.id.orderHistButton);
+
+
+        title = (TextView) view.findViewById(R.id.accTitle);
 
         fName.setText(AccountFrag.getFName());
         lName.setText(AccountFrag.getLName());
         email.setText(AccountFrag.getEmail());
         pass.setText(AccountFrag.getPass());
+
+        title.setText("Hi " + AccountFrag.getFName());
 
         updateDetails.setOnClickListener(new View.OnClickListener()
         {
@@ -102,6 +120,24 @@ public class AccountMainPage extends Fragment {
                 AccountFrag.setDetails(fNameText, lNameText, emailText, passText);
             }
         });
+
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fm.beginTransaction().remove(thisFrag).commit();
+                fm.beginTransaction().add(R.id.subMenu_frag_container, new AccountLogIn()).commit();
+            }
+        });
+
+        orderHist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fm.beginTransaction().remove(thisFrag).commit();
+                //fm.beginTransaction().add(R.id.subMenu_frag_container, new AccountLogIn()).commit();
+            }
+        });
+
+
 
         return view;
     }

@@ -15,22 +15,26 @@ import com.example.madassignment_1_1.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AccountCreateFrag#newInstance} factory method to
+ * Use the {@link AccountLogIn#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AccountCreateFrag extends Fragment {
+public class AccountLogIn extends Fragment {
 
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
-    private EditText fName;
-    private EditText lName;
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
     private EditText email;
     private EditText pass;
     private Button next;
-    private Button logIn;
-    private AccountMainPage mainPage;
-    private AccountCreateFrag thisFrag = this;
+    private AccountLogIn thisFrag = this;
 
-    public AccountCreateFrag() {
+    public AccountLogIn() {
         // Required empty public constructor
     }
 
@@ -40,12 +44,14 @@ public class AccountCreateFrag extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AccountCreateFrag.
+     * @return A new instance of fragment AccountLogIn.
      */
     // TODO: Rename and change types and number of parameters
-    public static AccountCreateFrag newInstance(String param1, String param2) {
-        AccountCreateFrag fragment = new AccountCreateFrag();
+    public static AccountLogIn newInstance(String param1, String param2) {
+        AccountLogIn fragment = new AccountLogIn();
         Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,23 +60,21 @@ public class AccountCreateFrag extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_account_log_in, container, false);
 
-        View view = inflater.inflate(R.layout.fragment_account_create, container, false);
 
-        fName = (EditText) view.findViewById(R.id.editTextFName);
-        lName = (EditText) view.findViewById(R.id.editTextLName);
+
         email = (EditText) view.findViewById(R.id.editTextEmail);
         pass = (EditText) view.findViewById(R.id.editTextPass);
         next = (Button) view.findViewById(R.id.logOutMain);
-        logIn = (Button) view.findViewById(R.id.logInButton);
 
 
         FragmentManager fm = getParentFragmentManager();
@@ -82,36 +86,19 @@ public class AccountCreateFrag extends Fragment {
         {
             @Override
             public void onClick(View view) {
-                if (mainPage == null)
-                {
-                    mainPage = new AccountMainPage();
-                }
-                String fNameText = fName.getText().toString();
-                String lNameText = lName.getText().toString();
+
                 String emailText = email.getText().toString();
                 String passText = pass.getText().toString();
-                AccountFrag.setDetails(fNameText, lNameText, emailText, passText);
+                AccountFrag.setDetails("TEMP", "TEMP", emailText, passText);
 
                 fm.beginTransaction().remove(thisFrag).commit();
                 //fragCurrent = fragRes;
 
-                fm.beginTransaction().add(R.id.subMenu_frag_container, mainPage).commit();
-            }
-        }
-        );
+                // DO THE DB VALIDATION HERE, GET THE FIRST/LAST NAME AS WELL IF POSSIBLE
 
-        logIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fm.beginTransaction().remove(thisFrag).commit();
-                //fragCurrent = fragRes;
-
-                fm.beginTransaction().add(R.id.subMenu_frag_container, new AccountLogIn()).commit();
+                fm.beginTransaction().add(R.id.subMenu_frag_container, new AccountMainPage()).commit();
             }
         });
-
-
-
 
         return view;
     }

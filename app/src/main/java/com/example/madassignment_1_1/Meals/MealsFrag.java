@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.madassignment_1_1.Cart.CartFrag;
 import com.example.madassignment_1_1.R;
 import com.example.madassignment_1_1.Restaurants.Restaurant;
 import com.example.madassignment_1_1.Restaurants.RestaurantList;
@@ -38,6 +40,10 @@ public class MealsFrag extends Fragment {
     private String mParam2;
 
     private MealsList mealsList;
+
+    private Button checkOutButton;
+
+    private MealsFrag thisFrag;
 
     public MealsFrag() {
         // Required empty public constructor
@@ -68,18 +74,37 @@ public class MealsFrag extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        thisFrag = this;
         mealsList = new MealsList(getContext());
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
+        FragmentManager fm = getParentFragmentManager();
         View view = inflater.inflate(R.layout.fragment_food, container, false);
+        checkOutButton = (Button) view.findViewById(R.id.checkOutButton);
         RecyclerView rv = view.findViewById(R.id.rvFood);
         rv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         MealsFrag.MealAdapter adapter = new MealsFrag.MealAdapter(mealsList);
         rv.setAdapter(adapter);
+
+        checkOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fm.beginTransaction().remove(thisFrag).commit();
+                //fragCurrent = fragRes;
+
+                fm.beginTransaction().add(R.id.frameLayout, new CartFrag()).commit();
+            }
+        });
+
+
         return view;
     }
 
