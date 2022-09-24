@@ -1,52 +1,98 @@
 package com.example.madassignment_1_1.Meals;
 
-import com.example.madassignment_1_1.R;
-import com.example.madassignment_1_1.Restaurants.Restaurant;
-import com.example.madassignment_1_1.Restaurants.RestaurantList;
+import android.content.Context;
+import android.util.Log;
 
-import java.util.Arrays;
+import com.example.madassignment_1_1.Restaurants.RestaurantDBModel;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MealsList {
+    private List<Meals> currMeals;
+    private List<Meals> allMeals;
+    MealItemDBModel mealItemDBModel;
+    RestaurantDBModel restaurantDBModel;
+    RestaurantsMealsCreator restaurantsMeals;
 
-    private List<Meal> mealsList = Arrays.asList(new Meal[]{
-            new Meal(R.drawable.dominos, "Dominos", 12.0),
-            new Meal(R.drawable.kfc, "KFC", 10.0),
-            new Meal(R.drawable.maccas, "McDonalds", 12.5),
-    });
-
-
-    private static MealsList instance = null;
-
-    public static MealsList get()
+    public void load(Context context)
     {
-        if(instance == null)
+        Log.d("debug Sam", "loading MealsList start");
+        currMeals = new ArrayList<>();
+        allMeals = new ArrayList<>();
+
+        mealItemDBModel = new MealItemDBModel();
+        mealItemDBModel.load(context);
+
+        restaurantDBModel = new RestaurantDBModel();
+        restaurantDBModel.load(context);
+
+        restaurantsMeals = new RestaurantsMealsCreator(mealItemDBModel, restaurantDBModel);
+
+        allMeals = restaurantsMeals.AddMeals();
+        currMeals = mealItemDBModel.getAllMealItems();
+
+        checkNewMeals();
+
+        Log.d("DEBUG", "MEALS...");
+        for(Meals meal : currMeals)
         {
-            instance = new MealsList();
+            Log.d("DEBUG", "MEAL: id:" + meal.getId() + " name:" + meal.getName() + " price:" + meal.getPrice() + " restaurantid:" + meal.getRestaurantId());
         }
-        return instance;
+
+//        if(mealItemDBModel.getNumTuples() <= 0)
+//        {
+//            Log.d("DEBUG", "CREATING NEW USERS");
+//            restaurantsMeals.DominosMeals();
+//
+//        }
+//        else
+//        {
+//            useraccountDBModel.getId("jamescarey@gmail.com", "jamescareypassword");
+//            useraccountDBModel.getId("angusbrayshaw@htomail.com", "angusbrayshawpassword");
+//            useraccountDBModel.getId("jacktyson@outlook.com", "jacktysonpassword");
+//        }
+        Log.d("DEBUG", "FINISHED LOADING DB");
+
     }
 
-    protected MealsList() {}
+    public MealsList(Context pContext) {
+        load(pContext);
+    }
 
-    public Meal get(int i)
+    public Meals get(int i)
     {
-        return mealsList.get(i);
+        return currMeals.get(i);
     }
 
     public int size()
     {
-        return mealsList.size();
+        return currMeals.size();
     }
 
-    public void add(Meal s)
-    {
-        mealsList.add(0, s);
-    }
 
-    public void remove(int i)
+    public void checkNewMeals()
     {
-        mealsList.remove(i);
+        Log.d("DEBUG", "Started Comparison");
+        boolean mealFound = false;
+        for(Meals meal : allMeals)
+        {
+            for(Meals loadedMeal : currMeals)
+            {
+                if(meal.getId() == loadedMeal.getId())
+                {
+                    mealFound = true;
+                }
+            }
+
+            if(!mealFound)
+            {
+                Log.d("DEBUG", "Found a restaurant (" + meal.getName() + "' that is not in the database");
+                mealItemDBModel.addMealItem(meal);
+            }
+
+            mealFound = false;
+        }
     }
 
 

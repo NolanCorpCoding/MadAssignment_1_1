@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -28,14 +29,20 @@ public class RestaurantDBModel
 
     public void addRestaurant(Restaurant pRestaurant)
     {
-        ContentValues contentValues = new ContentValues();
+        try {
+            ContentValues contentValues = new ContentValues();
 
-        contentValues.put(RestaurantTable.Cols.ID, pRestaurant.getId());
-        contentValues.put(RestaurantTable.Cols.NAME, pRestaurant.getName());
-        contentValues.put(RestaurantTable.Cols.ADDRESS, pRestaurant.getAddress());
-        contentValues.put(RestaurantTable.Cols.DRAWABLEREFERENCE, pRestaurant.getDrawableID());
+            contentValues.put(RestaurantTable.Cols.ID, pRestaurant.getId());
+            contentValues.put(RestaurantTable.Cols.NAME, pRestaurant.getName());
+            contentValues.put(RestaurantTable.Cols.ADDRESS, pRestaurant.getAddress());
+            contentValues.put(RestaurantTable.Cols.DRAWABLEREFERENCE, pRestaurant.getDrawableID());
 
-        database.insert(RestaurantTable.NAME, null, contentValues);
+            database.insert(RestaurantTable.NAME, null, contentValues);
+        }
+        catch(SQLiteConstraintException e)
+        {
+            Log.d("DEBUG", "ERROR inside " + e.getStackTrace() + " ... Reason: " + e.getMessage());
+        }
     }
 
     public void updateRestaurant() {}
@@ -91,7 +98,6 @@ public class RestaurantDBModel
         Restaurant tempRestaurant = new Restaurant(null, null,  0);
         int restaurantID = -1;
 
-//        Cursor cursor = database.query(RestaurantTable.NAME, new String[] {RestaurantTable.Cols.ID},RestaurantTable.Cols.NAME + " = ?",new String[] {restaurantName},null,null,null);
         Cursor cursor = database.query(RestaurantTable.NAME, null,RestaurantTable.Cols.NAME + " = ?",new String[] {restaurantName},null,null,null);
         RestaurantDBCursor restaurantDBCursor = new RestaurantDBCursor(cursor);
 

@@ -8,8 +8,7 @@ public class CartDBSchema
             public static final String ID = "id";
             public static final String PRICE = "price";
             public static final String USERACCOUNTID = "userAccountID";
-            public static final String RESTAURANTID = "restaurantID";
-            public static final String CURRENTCART = "currentCart";
+            public static final String ORDERTIME = "orderTime";
         }
     }
 }
