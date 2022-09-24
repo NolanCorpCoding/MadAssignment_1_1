@@ -5,7 +5,11 @@ import android.util.Log;
 
 import com.example.madassignment_1_1.Restaurants.RestaurantDBModel;
 
+import java.util.Random;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MealsList {
@@ -54,6 +58,21 @@ public class MealsList {
     public int size()
     {
         return currMeals.size();
+    }
+
+    public List<Meals> getRandomMeals(){
+
+        Random randomGenerator = new Random();
+
+        List<Meals> list = new ArrayList<>();
+
+        int numElements = 3;
+
+        for (int i = 0; i < numElements; i++)
+        {
+            list.add(allMeals.get(randomGenerator.nextInt(numElements)));
+        }
+        return list;
     }
 
 

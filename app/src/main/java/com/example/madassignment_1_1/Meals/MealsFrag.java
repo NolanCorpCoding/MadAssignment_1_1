@@ -269,7 +269,7 @@ public class MealsFrag extends Fragment {
                     }
 
                     // this is probably a dumb way of doing this for now, add a dedicated variable somewhere later
-                }
+                 }
             });
 
 //            holder.checkout.setOnClickListener(new View.OnClickListener() {
