@@ -3,6 +3,8 @@ package com.example.madassignment_1_1.Account;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import com.example.madassignment_1_1.Account.UserAccountDBSchema.UserAccountTable;
 
 public class UserAccountDBHelper extends SQLiteOpenHelper
@@ -17,8 +19,9 @@ public class UserAccountDBHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase)
     {
+        Log.d("DEBUG", "CREATING DB FOR ACCOUNT");
         sqLiteDatabase.execSQL("create table "+UserAccountTable.NAME+"("+UserAccountTable.Cols.ID+" INT PRIMARY KEY, "+UserAccountTable.Cols.FIRSTNAME+" TEXT,  "+UserAccountTable.Cols.LASTNAME+" " + "TEXT, " +
-                " "+ UserAccountTable.Cols.EMAIL+ " TEXT, " + UserAccountTable.Cols.PASS + " TEXT);");
+                " "+ UserAccountTable.Cols.EMAIL+ " TEXT, " + UserAccountTable.Cols.PASS + " TEXT, " + UserAccountTable.Cols.CURRENTCARTID + " INT);");
     }
 
     @Override

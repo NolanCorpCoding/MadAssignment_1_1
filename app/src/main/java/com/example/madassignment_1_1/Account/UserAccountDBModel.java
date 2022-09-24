@@ -33,6 +33,7 @@ public class UserAccountDBModel
         contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.LASTNAME, pAccount.getLastname());
         contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.EMAIL, pAccount.getEmail());
         contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.PASS, pAccount.getPass());
+        contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.CURRENTCARTID, pAccount.getCurrentCartId());
         database.insert(UserAccountDBSchema.UserAccountTable.NAME, null, contentValues);
     }
 
@@ -44,6 +45,7 @@ public class UserAccountDBModel
         contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.FIRSTNAME, pFirstname);
         contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.LASTNAME, pLastname);
         contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.EMAIL, pEmail);
+        contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.CURRENTCARTID, pUserAccount.getCurrentCartId());
         contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.PASS, pPass);
 
         String[] whereValue = {String.valueOf(pUserAccount.getId())};
@@ -144,20 +146,20 @@ public class UserAccountDBModel
         UserAccountDBCursor useraccountDBCursor = new UserAccountDBCursor(cursor);
 
         try{
-            Log.d("DEBUG", "Beginning of Try statement inside the UserAccountDBModel.getID() method");
+            Log.d("WOW", "Beginning of Try statement inside the UserAccountDBModel.getID() method");
             useraccountDBCursor.moveToFirst();
-            Log.d("DEBUG", "Moves to the first element of the query inside of the Try statement inside the UserAccountDBModel.getID() method");
+            Log.d("WOW", "Moves to the first element of the query inside of the Try statement inside the UserAccountDBModel.getID() method");
             tempUserAccount = useraccountDBCursor.getUserAccount();
-            Log.d("DEBUG", "Finds the user account id inside of the Try statement inside the UserAccountDBModel.getID() method");
+            Log.d("WOW", "Finds the user account id inside of the Try statement inside the UserAccountDBModel.getID() method");
             userAccountID = tempUserAccount.getId();
-            Log.d("WHILE LOOP", "ID = " + userAccountID + " for when the USER ACCOUNT = " + tempUserAccount.getFirstname() + " " + tempUserAccount.getLastname());
+            Log.d("WOW", "ID = " + userAccountID + " for when the USER ACCOUNT = " + tempUserAccount.getFirstname() + " " + tempUserAccount.getLastname());
         }
         catch(CursorIndexOutOfBoundsException e) {
-            Log.d("WHILE LOOP ERROR", "ERROR: " + e.getCause() + " ... " + e.getLocalizedMessage());
+            Log.d("WOW WHILE LOOP ERROR", "ERROR: " + e.getCause() + " ... " + e.getLocalizedMessage());
         }
         catch(SQLiteException e)
         {
-            Log.d("SQLite Exception ERROR", "ERROR: " + e.getCause() + " ... " + e.getLocalizedMessage());
+            Log.d("WOW SQLite Exception", "ERROR: " + e.getCause() + " ... " + e.getLocalizedMessage());
         }
         finally {
             cursor.close();

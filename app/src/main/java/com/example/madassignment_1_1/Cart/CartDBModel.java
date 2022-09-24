@@ -111,5 +111,21 @@ public class CartDBModel
 //        }
 //        return cartID;
 //    }
+
+    public Cart findCart(int id)
+    {
+        Cart tempCart = null;
+        Log.d("DEBUG", "START GOING THROUGH CARTS");
+        for(Cart cart : getAllCarts())
+        {
+            Log.d("DEBUG", "CYCLING THROUGH CURRENT CART " + cart.getId());
+            if(cart.getId() == id)
+            {
+                tempCart = cart;
+            }
+        }
+        return tempCart;
+    }
+
 }
 
