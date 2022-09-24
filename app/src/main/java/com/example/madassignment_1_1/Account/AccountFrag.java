@@ -43,6 +43,12 @@ public class AccountFrag extends Fragment {
         loggedInUserAccount.updatePass(pPass);
     }
 
+    public static UserAccount returnDetails()
+    {
+        return loggedInUserAccount;
+    }
+
+
     public static void loggoutAccount()
     {
         loggedInUserAccount = null;

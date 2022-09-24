@@ -36,7 +36,20 @@ public class UserAccountDBModel
         database.insert(UserAccountDBSchema.UserAccountTable.NAME, null, contentValues);
     }
 
-    public void updateUserAccount() {}
+    public void updateUserAccount(UserAccount pUserAccount, String pFirstname, String pLastname, String pEmail, String pPass)
+    {
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.ID, pUserAccount.getId());
+        contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.FIRSTNAME, pFirstname);
+        contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.LASTNAME, pLastname);
+        contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.EMAIL, pEmail);
+        contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.PASS, pPass);
+
+        String[] whereValue = {String.valueOf(pUserAccount.getId())};
+
+        database.update(UserAccountDBSchema.UserAccountTable.NAME, contentValues, UserAccountDBSchema.UserAccountTable.Cols.ID + " = ?", whereValue);
+    }
 
     public void deleteUserAccount(UserAccount pUserAccount)
     {

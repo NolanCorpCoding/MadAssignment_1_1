@@ -103,7 +103,7 @@ public class AccountLogIn extends Fragment {
 
                     UserAccount tempAccount = useracctList.findUser(emailText, passText);
                     AccountFrag.setDetails(tempAccount);
-                    Toast.makeText(view.getContext(), "************************ ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(view.getContext(), "Successfully Logged Into Account", Toast.LENGTH_LONG).show();
 
                     fm.beginTransaction().remove(thisFrag).commit();
                     //fragCurrent = fragRes;
@@ -114,7 +114,7 @@ public class AccountLogIn extends Fragment {
                 }
                 catch(IllegalArgumentException e)
                 {
-                    Toast.makeText(view.getContext(), "Failed to log into account with those details ... try again", Toast.LENGTH_LONG).show();
+                    Toast.makeText(view.getContext(), "Failed To Log Into Account With Those Details ... Try Again", Toast.LENGTH_LONG).show();
                 }
             }
         });

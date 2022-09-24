@@ -124,6 +124,12 @@ public class UserAccountList {
         return returningUser;
     }
 
+    public void updateUserAccount(UserAccount pUserAccount, String pFirstname, String pLastname, String pEmail, String pPass)
+    {
+        useraccountDBModel.updateUserAccount(pUserAccount, pFirstname, pLastname, pEmail, pPass);
+    }
+
+
 
 
 }

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.madassignment_1_1.R;
 
@@ -48,7 +49,7 @@ public class AccountMainPage extends Fragment {
 
     private AccountMainPage thisFrag = this;
 
-
+    private UserAccountList useracctList;
 
     public AccountMainPage() {
         // Required empty public constructor
@@ -79,6 +80,9 @@ public class AccountMainPage extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        useracctList = new UserAccountList();
+        useracctList.load(getActivity());
     }
 
     @Override
@@ -118,7 +122,13 @@ public class AccountMainPage extends Fragment {
                 String emailText = email.getText().toString();
                 String passText = pass.getText().toString();
 
+                useracctList.updateUserAccount(AccountFrag.returnDetails(), fNameText, lNameText, emailText, passText);
+
                 AccountFrag.updateDetails(fNameText, lNameText, emailText, passText);
+
+                title.setText("Hi " + AccountFrag.getFName());
+
+                Toast.makeText(view.getContext(), "Updated Details", Toast.LENGTH_LONG).show();
             }
         });
 
