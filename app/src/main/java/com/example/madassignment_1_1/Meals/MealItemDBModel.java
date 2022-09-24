@@ -14,12 +14,15 @@ public class MealItemDBModel
 {
     SQLiteDatabase database;
 
+    Context context;
+
     public void load(Context context)
     {
         this.database = new MealItemDBHelper(context).getWritableDatabase();
 //        Log.d("WARNING", "Resetting the meal database");
 //        new MealItemDBHelper(context).deleteTable(database);
 //        new MealItemDBHelper(context).onCreate(database);
+        this.context = context;
 
     }
 
@@ -45,6 +48,8 @@ public class MealItemDBModel
 
     public ArrayList<Meals> getAllMealItems()
     {
+        Log.d("debug Sam", "im out of the loop");
+
         ArrayList<Meals> mealItemList = new ArrayList<>();
         Cursor cursor = database.query(MealItemDBSchema.MealsTable.NAME,null,null,null,null,null,null);
         MealItemDBCursor mealItemDBCursor = new MealItemDBCursor(cursor);
@@ -61,7 +66,15 @@ public class MealItemDBModel
             cursor.close();
         }
 
+        for (Meals meals : mealItemList)
+        {
+            Log.d("debug Sam", "im in the loop");
+            Log.d("debug Sam", meals.getName());
+        }
+
         return mealItemList;
+
+
     }
 
     public int getNumTuples()
