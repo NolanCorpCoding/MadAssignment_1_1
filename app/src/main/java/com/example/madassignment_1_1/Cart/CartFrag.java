@@ -124,14 +124,11 @@ public class CartFrag extends Fragment {
     }
 
 
-
-
-
     public class CartItemAdapter extends RecyclerView.Adapter<CartFrag.CartItemViewHolder> {
 
         List<CartMenuItem> data;
 
-        public CartItemAdapter(List<CartMenuItem> data){
+        public CartItemAdapter(List<CartMenuItem> data) {
             this.data = data;
         }
 
@@ -140,7 +137,7 @@ public class CartFrag extends Fragment {
         public CartFrag.CartItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             Log.d("adapter: ", "on create view");
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-            View view = layoutInflater.inflate(R.layout.meal_entry,parent,false);
+            View view = layoutInflater.inflate(R.layout.meal_entry, parent, false);
             CartItemViewHolder myViewHolder = new CartItemViewHolder(view, parent);
             return myViewHolder;
         }
@@ -175,7 +172,7 @@ public class CartFrag extends Fragment {
                 @Override
                 public void onClick(View view) {
                     // need to update database here
-                    holder.mealNum.setText( Double.toString(Double.parseDouble(holder.mealNum.getText().toString()) + 1));
+                    holder.mealNum.setText(Double.toString(Double.parseDouble(holder.mealNum.getText().toString()) + 1));
                     // this is probably a dumb way of doing this for now, add a dedicated variable somewhere later
                 }
             });
@@ -184,9 +181,8 @@ public class CartFrag extends Fragment {
                 @Override
                 public void onClick(View view) {
                     // need to update database here
-                    if (Double.parseDouble(holder.mealNum.getText().toString()) >= 1.0)
-                    {
-                        holder.mealNum.setText( Double.toString(Double.parseDouble(holder.mealNum.getText().toString()) - 1));
+                    if (Double.parseDouble(holder.mealNum.getText().toString()) >= 1.0) {
+                        holder.mealNum.setText(Double.toString(Double.parseDouble(holder.mealNum.getText().toString()) - 1));
                     }
                     // this is probably a dumb way of doing this for now, add a dedicated variable somewhere later
                 }
@@ -199,4 +195,5 @@ public class CartFrag extends Fragment {
             return data.size();
             //return 0;
         }
+    }
 }
