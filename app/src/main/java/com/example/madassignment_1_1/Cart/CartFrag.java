@@ -16,10 +16,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.madassignment_1_1.CartMenuItem.CartMenuItem;
 import com.example.madassignment_1_1.Meals.Meals;
 import com.example.madassignment_1_1.Meals.MealsFrag;
 import com.example.madassignment_1_1.Meals.MealsList;
 import com.example.madassignment_1_1.R;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +42,8 @@ public class CartFrag extends Fragment {
 
     private Button checkOutButton;
     private CartFrag thisFrag = this;
+
+    private List<CartMenuItem> currentCartItems;
 
     public CartFrag() {
         // Required empty public constructor
@@ -80,7 +85,7 @@ public class CartFrag extends Fragment {
         checkOutButton = (Button) view.findViewById(R.id.payButton);
         RecyclerView rv = view.findViewById(R.id.rvCart);
         rv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        MealsFrag.MealAdapter adapter = new MealsFrag.MealAdapter(mealsList);
+        CartItemAdapter adapter = new CartItemAdapter(currentCartItems);
         // add in the proper list here
         rv.setAdapter(adapter);
 
@@ -124,9 +129,9 @@ public class CartFrag extends Fragment {
 
     public class CartItemAdapter extends RecyclerView.Adapter<CartFrag.CartItemViewHolder> {
 
-        MealsList data;
+        List<CartMenuItem> data;
 
-        public CartItemAdapter(MealsList data){
+        public CartItemAdapter(List<CartMenuItem> data){
             this.data = data;
         }
 
@@ -136,7 +141,7 @@ public class CartFrag extends Fragment {
             Log.d("adapter: ", "on create view");
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
             View view = layoutInflater.inflate(R.layout.meal_entry,parent,false);
-            CartFrag.CartItemViewHolder myViewHolder = new CartFrag.CartItemViewHolder(view, parent);
+            CartItemViewHolder myViewHolder = new CartItemViewHolder(view, parent);
             return myViewHolder;
         }
 
@@ -155,12 +160,15 @@ public class CartFrag extends Fragment {
 //                    //THIS IS WHERE THE "ACTION" HAPPENS
 //                }
 //            });
-            Meals meal = mealsList.get(position);
-            holder.mealName.setText(meal.getName());
-            holder.mealPrice.setText(String.valueOf(meal.getPrice()));
-            holder.img.setImageResource(meal.getDrawableId());
+//            Meals meal = mealsList.get(position);
+//            holder.mealName.setText(meal.getName());
+//            holder.mealPrice.setText(String.valueOf(meal.getPrice()));
+//            holder.img.setImageResource(meal.getDrawableId());
+//
+//            holder.mealNum.setText("0");
 
-            holder.mealNum.setText("0");
+            // THE MAGIC HAPPENS HERE
+
             // the number of meals in the cart needs to gotten from the cart i believe
 
             holder.plus.setOnClickListener(new View.OnClickListener() {
