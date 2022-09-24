@@ -10,8 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.madassignment_1_1.R;
+
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +37,8 @@ public class AccountLogIn extends Fragment {
     private EditText pass;
     private Button next;
     private AccountLogIn thisFrag = this;
+
+    private UserAccountList useracctList;
 
     public AccountLogIn() {
         // Required empty public constructor
@@ -63,6 +69,9 @@ public class AccountLogIn extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        useracctList = new UserAccountList();
+        useracctList.load(getActivity());
     }
 
     @Override
@@ -85,18 +94,28 @@ public class AccountLogIn extends Fragment {
         next.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
+                try
+                {
+                    String emailText = email.getText().toString();
+                    String passText = pass.getText().toString();
 
-                String emailText = email.getText().toString();
-                String passText = pass.getText().toString();
-                AccountFrag.setDetails("TEMP", "TEMP", emailText, passText);
+                    UserAccount tempAccount = useracctList.findUser(emailText, passText);
+                    AccountFrag.setDetails(tempAccount);
+                    Toast.makeText(view.getContext(), "Successfully Logged Into Account", Toast.LENGTH_LONG).show();
 
-                fm.beginTransaction().remove(thisFrag).commit();
-                //fragCurrent = fragRes;
+                    fm.beginTransaction().remove(thisFrag).commit();
+                    //fragCurrent = fragRes;
 
-                // DO THE DB VALIDATION HERE, GET THE FIRST/LAST NAME AS WELL IF POSSIBLE
+                    // DO THE DB VALIDATION HERE, GET THE FIRST/LAST NAME AS WELL IF POSSIBLE
 
-                fm.beginTransaction().add(R.id.subMenu_frag_container, new AccountMainPage()).commit();
+                    fm.beginTransaction().add(R.id.subMenu_frag_container, new AccountMainPage()).commit();
+                }
+                catch(IllegalArgumentException e)
+                {
+                    Toast.makeText(view.getContext(), "Failed To Log Into Account With Those Details ... Try Again", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
