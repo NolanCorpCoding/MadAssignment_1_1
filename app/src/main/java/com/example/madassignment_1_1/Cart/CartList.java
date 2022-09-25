@@ -85,6 +85,10 @@ public class CartList {
         {
             Log.d("WOW", "DID NOT FIND THE CART MEAL INSIDE THE DB");
         }
+        else
+        {
+            Log.d("WOW", "EXPORTING WITH THE CART WITH AN ID OF" + pCart.getId());
+        }
 
         return pCart;
     }

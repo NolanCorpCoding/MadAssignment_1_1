@@ -99,4 +99,19 @@ public class MealsList {
             mealFound = false;
         }
     }
+
+    public Meals findMeal(int id)
+    {
+        Meals meal = null;
+
+        for(Meals currMeal : currMeals)
+        {
+            if(id == currMeal.getId())
+            {
+                meal = currMeal;
+            }
+        }
+
+        return meal;
+    }
 }

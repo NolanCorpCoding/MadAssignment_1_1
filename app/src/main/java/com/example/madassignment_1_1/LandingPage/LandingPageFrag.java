@@ -51,7 +51,10 @@ public class LandingPageFrag extends Fragment {
 
     private List<Meals> mealsList;
 
+    private List<CartMenuItem> currentCartItems;
+    private int currentCartId;
     private CartList cartList;
+    private Cart currCart;
 
     public LandingPageFrag() {
         // Required empty public constructor
@@ -83,11 +86,21 @@ public class LandingPageFrag extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         thisFrag = this;
+
         MealsList actualMealsList = new MealsList(getContext());
+        actualMealsList.load(getActivity());
         mealsList = actualMealsList.getRandomMeals();
 
-        cartList = new CartList();
-        cartList.load(getContext());
+        if (AccountFrag.returnDetails() != null)
+        {
+            currentCartId = AccountFrag.returnDetails().getCurrentCartId();
+            cartList = new CartList();
+            cartList.load(getContext());
+
+            currCart = cartList.getCart(currentCartId);
+
+            currentCartItems = currCart.getMenuItemList();
+        }
     }
 
         @Override
@@ -107,10 +120,16 @@ public class LandingPageFrag extends Fragment {
             checkOutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    fm.beginTransaction().remove(thisFrag).commit();
-                    //fragCurrent = fragRes;
+                    if (AccountFrag.returnDetails() != null) {
+                        fm.beginTransaction().remove(thisFrag).commit();
+                        //fragCurrent = fragRes;
 
-                    fm.beginTransaction().add(R.id.frameLayout, new CartFrag()).commit();
+                        fm.beginTransaction().add(R.id.frameLayout, new CartFrag()).commit();
+                    }
+                    else
+                    {
+                        Toast.makeText(view.getContext(), "Please make an account first", Toast.LENGTH_LONG).show();
+                    }
                 }
             });
 
@@ -162,56 +181,44 @@ public class LandingPageFrag extends Fragment {
 
             @Override
             public void onBindViewHolder(@NonNull MealDayViewHolder holder, int position) {
-//            Restaurant restaurant = resList.get(position);
-//            holder.img.setImageResource(restaurant.getDrawableID());
-//            holder.textName.setText(restaurant.getName());
-//            holder.textAddress.setText(restaurant.getAddress());
+                Meals currMealItem = mealsList.get(position);
 
-//            holder.img.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Toast.makeText(view.getContext(), "clicked menu item", Toast.LENGTH_SHORT).show(); //doesnt work
-//                    //Menu.setSelected(structure);
-//                    //THIS IS WHERE THE "ACTION" HAPPENS
-//                }
-//            });
-                Meals meal = mealsList.get(position);
-                holder.mealName.setText(meal.getName());
-                holder.mealPrice.setText(String.valueOf(meal.getPrice()));
-                holder.img.setImageResource(meal.getDrawableId());
+                try {
+                    holder.mealName.setText(currMealItem.getName());
+                    holder.mealPrice.setText(String.valueOf(currMealItem.getPrice()));
+                    holder.img.setImageResource(currMealItem.getDrawableId());
 
-                holder.mealNum.setText("0");
+                    int currentCartId = AccountFrag.returnDetails().getCurrentCartId();
+
+                    int quantityShow = cartList.getCartMealItem(currentCartId, currMealItem.getId()).getQuantity();
+
+                    holder.mealNum.setText(String.valueOf(quantityShow));
+                }
+                catch(NullPointerException e)
+                {
+                    holder.mealNum.setText("0");
+                }
+
                 // the number of meals in the cart needs to gotten from the cart i believe
 
                 holder.plus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        try {
+                        if (AccountFrag.returnDetails() != null)
+                        {
                             int quantity = Integer.valueOf(holder.mealNum.getText().toString()) + 1;
                             int currentCartId = AccountFrag.returnDetails().getCurrentCartId();
                             Cart currCart = cartList.getCart(currentCartId);
 
-                            cartList.addMeal(currCart, meal, quantity, getActivity());
+                            cartList.addMeal(currCart, currMealItem, quantity, getActivity());
 
                             holder.mealNum.setText(String.valueOf(quantity));
 
 
                             Toast.makeText(view.getContext(), "Current cart price = " + currCart.getTotalPrice(), Toast.LENGTH_LONG).show();
-
-//                        Log.d("CHECK", "MENU ITEM LIST FOR CART " + currCart.getId());
-//                        for(CartMenuItem itemCart : currCart.getMenuItemList())
-//                        {
-//                            if(currCart.getId() == itemCart.getCartID())
-//                            {
-//                                Meals menuItem = cartList.getMeal(itemCart.getMenuItemID());
-//                                Log.d("CHECK", "Item id: " + menuItem.getId() + "  name: " + menuItem.getName() + "  quantity: " + itemCart.getQuantity());
-//                            }
-//                        }
-//
-//                        cartList.printAllCartMenuItem();
                         }
-                        catch (NullPointerException e)
+                        else
                         {
                             Toast.makeText(view.getContext(), "Go log into your account to add to your cart", Toast.LENGTH_LONG).show();
                             //link to account sign up/in page
@@ -223,33 +230,23 @@ public class LandingPageFrag extends Fragment {
                     @Override
                     public void onClick(View view) {
 
-                        int requestedQuantity = Integer.valueOf(holder.mealNum.getText().toString()) - 1;
-                        if(requestedQuantity >= 0)
+                        if (AccountFrag.returnDetails() != null)
                         {
-
-                            int quantity = requestedQuantity;
+                            int quantity = Integer.valueOf(holder.mealNum.getText().toString()) - 1;
                             int currentCartId = AccountFrag.returnDetails().getCurrentCartId();
                             Cart currCart = cartList.getCart(currentCartId);
 
-                            cartList.addMeal(currCart, meal, quantity, getActivity());
+                            cartList.addMeal(currCart, currMealItem, quantity, getActivity());
 
                             holder.mealNum.setText(String.valueOf(quantity));
 
-                            Toast.makeText(view.getContext(), "Current cart price = " + currCart.getTotalPrice(), Toast.LENGTH_LONG).show();
 
-                            Log.d("CHECK", "MENU ITEM LIST FOR CART " + currCart.getId());
-                            for(CartMenuItem itemCart : currCart.getMenuItemList())
-                            {
-                                if(currCart.getId() == itemCart.getCartID())
-                                {
-                                    Meals menuItem = cartList.getMeal(itemCart.getMenuItemID());
-                                    Log.d("CHECK", "Item id: " + menuItem.getId() + "  name: " + menuItem.getName() + "  quantity: " + itemCart.getQuantity());
-                                }
-                            }
+                            Toast.makeText(view.getContext(), "Current cart price = " + currCart.getTotalPrice(), Toast.LENGTH_LONG).show();
                         }
                         else
                         {
-                            Toast.makeText(view.getContext(), "Can't have less than 0 meals...", Toast.LENGTH_LONG).show();
+                            Toast.makeText(view.getContext(), "Go log into your account to add to your cart", Toast.LENGTH_LONG).show();
+                            //link to account sign up/in page
                         }
                     }
                 });
