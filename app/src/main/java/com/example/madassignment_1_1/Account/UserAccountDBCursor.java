@@ -9,7 +9,6 @@ public class UserAccountDBCursor extends CursorWrapper
     public UserAccountDBCursor(Cursor cursor)
     {
         super(cursor);
-//        UserAccount.resetAutoNextId();
     }
 
     public UserAccount getUserAccount(){
