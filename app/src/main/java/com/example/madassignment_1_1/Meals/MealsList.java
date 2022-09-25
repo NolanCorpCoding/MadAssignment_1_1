@@ -30,7 +30,7 @@ public class MealsList {
         restaurantDBModel = new RestaurantDBModel();
         restaurantDBModel.load(context);
 
-        restaurantsMeals = new RestaurantsMealsCreator(mealItemDBModel, restaurantDBModel);
+        restaurantsMeals = new RestaurantsMealsCreator(mealItemDBModel, restaurantDBModel, context);
 
         allMeals = restaurantsMeals.AddMeals();
         currMeals = mealItemDBModel.getAllMealItems();
@@ -70,6 +70,12 @@ public class MealsList {
     {
         return currMeals.size();
     }
+
+    public List<Meals> getAllCurrentMeals()
+    {
+        return currMeals;
+    }
+
 
     public List<Meals> getRandomMeals(){
 
