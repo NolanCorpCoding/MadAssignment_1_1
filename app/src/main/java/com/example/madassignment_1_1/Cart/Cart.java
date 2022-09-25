@@ -100,5 +100,40 @@ public class Cart {
         totalPrice = Math.round(100.0*tempTotal)/100.0;
     }
 
+    public void loadMeals(Context context)
+    {
+        CartMenuItemDBModel cartMenuItemDBModel = new CartMenuItemDBModel();
+        cartMenuItemDBModel.load(context);
+
+        for(CartMenuItem loopingCartMenuItem : cartMenuItemDBModel.getAllCartMenuItems())
+        {
+            if(loopingCartMenuItem.getCartID() == this.id)
+            {
+                menuItemList.add(loopingCartMenuItem);
+            }
+        }
+    }
+
+    public ArrayList<Meals> getMealsList(Context context)
+    {
+        MealsList mealsList = new MealsList(context);
+        mealsList.load(context);
+
+        ArrayList meals = new ArrayList();
+
+        for(CartMenuItem menuItem : menuItemList)
+        {
+            for(int i = 0; i < menuItem.getQuantity(); i++)
+            {
+                Meals tempMeal = mealsList.findMeal(menuItem.getMenuItemID());
+                meals.add(tempMeal);
+            }
+        }
+
+        return meals;
+    }
+
+
+
 
 }

@@ -1,5 +1,6 @@
 package com.example.madassignment_1_1.Account;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.madassignment_1_1.Cart.Cart;
@@ -38,6 +39,8 @@ public class UserAccount
         this.currentCartID = cartId;
 //        currentCart = new Cart(0, this.id);
 
+        previousCarts = new ArrayList<>();
+
         autoNextId = id + 1;
     }
 
@@ -49,6 +52,8 @@ public class UserAccount
         this.email = pEmail;
         this.pass = pPass;
 //        currentCart = new Cart(0, this.id);
+
+        previousCarts = new ArrayList<>();
 
         autoNextId++;
     }
@@ -98,6 +103,7 @@ public class UserAccount
 
     public ArrayList<Cart> getPreviousCarts() { return previousCarts; }
 
+
     public void setEmail(String pEmail)
     {
         this.firstname = pEmail;
@@ -109,4 +115,31 @@ public class UserAccount
         this.currentCart = currentCart;
         this.currentCartID = currentCart.getId();
     }
+
+    public void setCurrentCartID(int currentCartID) {
+        this.currentCartID = currentCartID;
+    }
+
+    public void loadPrevCarts(Context context)
+    {
+        CartDBModel pCartDBModel = new CartDBModel();
+        pCartDBModel.load(context);
+
+        previousCarts.clear();
+
+        for(Cart loopingCart : pCartDBModel.getAllCarts())
+        {
+            Log.d("LOOPINGDEBUG",
+                    "Looping Cart: cartid=" + loopingCart.getId() + " userid= " + loopingCart.getUserAccountID() + "  VS  currentCart: cartid=" + this.getCurrentCartId() + " userid=" + this.getId());
+            if((loopingCart.getUserAccountID() == this.id) && (loopingCart.getId() != this.currentCartID))
+            {
+                Log.d("LOOPINGDEBUG", "CART " + loopingCart.getId() + " belonging to " + loopingCart.getUserAccountID() + " ADDED");
+                loopingCart.loadMeals(context);
+                previousCarts.add(loopingCart);
+            }
+        }
+
+        Log.d("LOOPINGDEBUG", "END LOOP : LIST SIZE =  " + previousCarts.size());
+    }
+
 }

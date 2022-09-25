@@ -1,5 +1,6 @@
 package com.example.madassignment_1_1.Account;
 
+import android.accounts.OnAccountsUpdateListener;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,11 +17,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.madassignment_1_1.Cart.Cart;
 import com.example.madassignment_1_1.Meals.MealsFrag;
 import com.example.madassignment_1_1.R;
 import com.example.madassignment_1_1.Restaurants.Restaurant;
 import com.example.madassignment_1_1.Restaurants.RestaurantList;
 import com.example.madassignment_1_1.Restaurants.RestaurantsFrag;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,7 +43,9 @@ public class AccountOrderHistory extends Fragment {
     private String mParam2;
 
     private AccountOrderHistory thisFrag = this;
-    private FragmentManager fm = getParentFragmentManager();
+    private FragmentManager fm;
+
+    private ArrayList<Cart> prevCarts;
 
     public AccountOrderHistory() {
         // Required empty public constructor
@@ -65,11 +71,20 @@ public class AccountOrderHistory extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        fm = getParentFragmentManager();
+
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        prevCarts = new ArrayList<>();
+        UserAccount currUser = AccountFrag.returnDetails();
+        currUser.loadPrevCarts(getActivity());
+        prevCarts = currUser.getPreviousCarts();
+
+        Log.d("ACCOUNTORDERHISTORY", "prevCarts.size = " + prevCarts.size());
     }
 
     @Override
@@ -80,8 +95,8 @@ public class AccountOrderHistory extends Fragment {
         View view = inflater.inflate(R.layout.fragment_account_order_history, container, false);
         RecyclerView rv = view.findViewById(R.id.rvOrders);
         rv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-//        OrderAdapter adapter = new OrderAdapter(resList);
-//        rv.setAdapter(adapter);
+        OrderAdapter adapter = new OrderAdapter(prevCarts);
+        rv.setAdapter(adapter);
         return view;
     }
 
@@ -90,16 +105,13 @@ public class AccountOrderHistory extends Fragment {
 
     public class OrderViewHolder extends RecyclerView.ViewHolder {
         TextView textName;
-        TextView textNum;
         TextView textPrice;
-        ImageView img;
 
         public OrderViewHolder(@NonNull View itemView, ViewGroup parent) {
             super(itemView);
-            textName = itemView.findViewById(R.id.mealName);
-            textNum = itemView.findViewById(R.id.mealNum);
-            textPrice = itemView.findViewById(R.id.mealPrice);
-            img = itemView.findViewById(R.id.imgMealIcon);
+            textName = itemView.findViewById(R.id.orderNumber);
+//            textNum = itemView.findViewById(R.id.mealNum);
+            textPrice = itemView.findViewById(R.id.orderPrice);
 
         }
     }
@@ -110,9 +122,9 @@ public class AccountOrderHistory extends Fragment {
 
     public class OrderAdapter extends RecyclerView.Adapter<AccountOrderHistory.OrderViewHolder> {
 
-        RestaurantList data;
+        ArrayList<Cart> data;
 
-        public OrderAdapter(RestaurantList data){
+        public OrderAdapter(ArrayList<Cart> data){
             this.data = data;
         }
 
@@ -128,20 +140,10 @@ public class AccountOrderHistory extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull AccountOrderHistory.OrderViewHolder holder, int position) {
-//            Restaurant restaurant = resList.get(position);
-//            holder.img.setImageResource(restaurant.getDrawableID());
-//            holder.textName.setText(restaurant.getName());
-//            holder.textAddress.setText(restaurant.getAddress());
-
-            holder.img.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "clicked menu item", Toast.LENGTH_SHORT).show();
-                    //THIS IS WHERE THE "ACTION" HAPPENS
-                    fm.beginTransaction().remove(thisFrag).commit();
-                    fm.beginTransaction().add(R.id.frameLayout, new AccountSingleOrder()).commit();
-                }
-            });
+            Cart cart = data.get(position);
+            Log.d("ACCOUNTORDERHISTORY", "CART INITIALISED: id=" + cart.getId() + " user=" + cart.getUserAccountID() + " price=" + cart.getTotalPrice());
+            holder.textName.setText(String.valueOf(cart.getId()));
+            holder.textPrice.setText(String.valueOf(cart.getTotalPrice()));
         }
 
         @Override

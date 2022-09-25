@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.madassignment_1_1.Account.AccountFrag;
 import com.example.madassignment_1_1.Account.UserAccount;
+import com.example.madassignment_1_1.Account.UserAccountDBModel;
 import com.example.madassignment_1_1.CartMenuItem.CartMenuItem;
 import com.example.madassignment_1_1.MainActivity;
 import com.example.madassignment_1_1.Meals.Meals;
@@ -57,6 +59,11 @@ public class CartFrag extends Fragment {
     private MealsList mealsList;
 
     private TextView totalPriceCart;
+
+    UserAccountDBModel useraccountDBModel;
+
+    CartDBModel cartDBModel;
+
 
     public CartFrag() {
         // Required empty public constructor
@@ -110,6 +117,11 @@ public class CartFrag extends Fragment {
         mealsList = new MealsList(getContext());
         mealsList.load(getContext());
 
+        useraccountDBModel = new UserAccountDBModel();
+        useraccountDBModel.load(getContext());
+
+        cartDBModel = new CartDBModel();
+        cartDBModel.load(getContext());
     }
 
     @Override
@@ -129,6 +141,47 @@ public class CartFrag extends Fragment {
         checkOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                UserAccount user = AccountFrag.returnDetails();
+                if(user.getCurrentCart().getMenuItemList() != null)
+                {
+//                    Cart oldCart = user.getCurrentCart();
+
+//                    user.setPreviousCart(oldCart);
+
+                    Cart newCart = new Cart(0, user.getId());
+                    user.setCurrentCart(newCart);
+                    user.setCurrentCartID(newCart.getId());
+
+                    cartDBModel.addCart(newCart);
+
+                    useraccountDBModel.updateUserAccount(user, user.getFirstname(), user.getLastname(), user.getEmail(), user.getCurrentCartId(), user.getPass());
+
+                    user.loadPrevCarts(getActivity());
+
+                    Log.d("DEBUG USER CART", "Starting user cart list");
+
+                        for(Cart cartLooping : user.getPreviousCarts())
+                        {
+                            Log.d("DEBUG USER CART", "User " + user.getId() + " " + user.getFirstname() + " " + user.getLastname() + " has used the cart " + cartLooping.getId() + " and the cart has" +
+                                    " a size of " + cartLooping.getMenuItemList().size());
+                            for(CartMenuItem menuItem : cartLooping.getMenuItemList())
+                            {
+                                Meals tempMeal = mealsList.findMeal(menuItem.getMenuItemID());
+
+                                for(int i = 0; i < menuItem.getQuantity(); i++)
+                                {
+                                    Log.d("DEBUG USER CART", "Meal " + tempMeal.getId() + " " + tempMeal.getName()  + " is in the cart " + menuItem.getCartID());
+                                }
+                            }
+                        }
+                        Log.d("DEBUG USER CART",
+                                "User " + user.getId() + " " +
+                                        user.getFirstname() + " " +
+                                        user.getLastname() + " has the current cart of " +
+                                        user.getCurrentCartId());
+
+                    }
+
                 fm.beginTransaction().remove(thisFrag).commit();
                 //fragCurrent = fragRes;
 
@@ -205,7 +258,7 @@ public class CartFrag extends Fragment {
             }
             else
             {
-                holder.mealNum.setText("100");
+                holder.mealNum.setText("-100");
             }
 
             holder.plus.setOnClickListener(new View.OnClickListener() {

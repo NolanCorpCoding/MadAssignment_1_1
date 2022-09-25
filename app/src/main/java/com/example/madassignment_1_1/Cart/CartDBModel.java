@@ -27,6 +27,8 @@ public class CartDBModel
     {
         ContentValues contentValues = new ContentValues();
 
+        Log.d("DEBUG USER CART", "ADDDING CART TO DB: id=" + pCart.getId() + " price=" + pCart.getTotalPrice() + " refUserId=" + pCart.getUserAccountID());
+
         contentValues.put(CartDBSchema.CartTable.Cols.ID, pCart.getId());
         contentValues.put(CartDBSchema.CartTable.Cols.PRICE, pCart.getTotalPrice());
         contentValues.put(CartDBSchema.CartTable.Cols.USERACCOUNTID, pCart.getUserAccountID());
@@ -124,6 +126,7 @@ public class CartDBModel
                 tempCart = cart;
             }
         }
+        Log.d("DEBUG", "FINISHED GOING THROUGH CARTS");
         return tempCart;
     }
 

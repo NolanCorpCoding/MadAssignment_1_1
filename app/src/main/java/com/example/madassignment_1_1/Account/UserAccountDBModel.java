@@ -37,7 +37,7 @@ public class UserAccountDBModel
         database.insert(UserAccountDBSchema.UserAccountTable.NAME, null, contentValues);
     }
 
-    public void updateUserAccount(UserAccount pUserAccount, String pFirstname, String pLastname, String pEmail, String pPass)
+    public void updateUserAccount(UserAccount pUserAccount, String pFirstname, String pLastname, String pEmail, int pCurrentCartID, String pPass)
     {
         ContentValues contentValues = new ContentValues();
 
@@ -45,7 +45,7 @@ public class UserAccountDBModel
         contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.FIRSTNAME, pFirstname);
         contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.LASTNAME, pLastname);
         contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.EMAIL, pEmail);
-        contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.CURRENTCARTID, pUserAccount.getCurrentCartId());
+        contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.CURRENTCARTID, pCurrentCartID);
         contentValues.put(UserAccountDBSchema.UserAccountTable.Cols.PASS, pPass);
 
         String[] whereValue = {String.valueOf(pUserAccount.getId())};

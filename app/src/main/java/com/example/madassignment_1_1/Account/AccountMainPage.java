@@ -144,7 +144,7 @@ public class AccountMainPage extends Fragment {
             @Override
             public void onClick(View view) {
                 fm.beginTransaction().remove(thisFrag).commit();
-                //fm.beginTransaction().add(R.id.subMenu_frag_container, new AccountLogIn()).commit();
+                fm.beginTransaction().add(R.id.subMenu_frag_container, new AccountOrderHistory()).commit();
             }
         });
 

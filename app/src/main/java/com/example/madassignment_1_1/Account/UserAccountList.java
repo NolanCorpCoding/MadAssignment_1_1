@@ -95,6 +95,7 @@ public class UserAccountList {
             {
                 if(acct.getId() == idFound)
                 {
+                    Log.d("DEBUG USER CART", "user current cart id : " + acct.getCurrentCartId());
                     returningUser = acct;
                     returningUser.setCurrentCart(cartDBModel.findCart(acct.getCurrentCartId()));
                     Log.d("DEBUG", "FOUND THE USER TO LOG INTO ...");
@@ -149,7 +150,7 @@ public class UserAccountList {
 
     public void updateUserAccount(UserAccount pUserAccount, String pFirstname, String pLastname, String pEmail, String pPass)
     {
-        useraccountDBModel.updateUserAccount(pUserAccount, pFirstname, pLastname, pEmail, pPass);
+        useraccountDBModel.updateUserAccount(pUserAccount, pFirstname, pLastname, pEmail, pUserAccount.getCurrentCartId(), pPass);
     }
 
 
