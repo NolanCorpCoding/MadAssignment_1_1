@@ -5,12 +5,15 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.madassignment_1_1.R;
 
@@ -94,13 +97,20 @@ public class AccountCreateFrag extends Fragment {
                 String emailText = email.getText().toString();
                 String passText = pass.getText().toString();
 
-                UserAccount tempAccount = useracctList.findUser(fNameText, lNameText, emailText, passText);
-                AccountFrag.setDetails(tempAccount);
 
-                fm.beginTransaction().remove(thisFrag).commit();
-                //fragCurrent = fragRes;
+                if (!TextUtils.isEmpty(emailText) && Patterns.EMAIL_ADDRESS.matcher(emailText).matches() && !TextUtils.isEmpty(fNameText) && !TextUtils.isEmpty(lNameText) && !TextUtils.isEmpty(passText)){
+                    UserAccount tempAccount = useracctList.findUser(fNameText, lNameText, emailText, passText);
+                    AccountFrag.setDetails(tempAccount);
 
-                fm.beginTransaction().add(R.id.subMenu_frag_container, mainPage).commit();
+                    fm.beginTransaction().remove(thisFrag).commit();
+                    //fragCurrent = fragRes;
+
+                    fm.beginTransaction().add(R.id.subMenu_frag_container, mainPage).commit();
+                }
+                else{
+                    Toast.makeText(view.getContext(), "Please fill out the fields correctly", Toast.LENGTH_LONG).show();
+                }
+
             }
         }
         );
