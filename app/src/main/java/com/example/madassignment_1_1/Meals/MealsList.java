@@ -83,10 +83,11 @@ public class MealsList {
         List<Meals> list = new ArrayList<>();
 
         int numElements = 12;
+        int randomLimit = currMeals.size() -1;
 
         for (int i = 0; i < numElements; i++)
         {
-            list.add(allMeals.get(randomGenerator.nextInt(numElements)));
+            list.add(currMeals.get(randomGenerator.nextInt(randomLimit)));
         }
         return list;
     }
