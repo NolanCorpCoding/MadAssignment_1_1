@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.madassignment_1_1.Account.AccountCreateFrag;
 import com.example.madassignment_1_1.Account.AccountFrag;
+import com.example.madassignment_1_1.Account.AccountMainPage;
 import com.example.madassignment_1_1.Cart.CartFrag;
 import com.example.madassignment_1_1.LandingPage.LandingPageFrag;
 import com.example.madassignment_1_1.Meals.MealsFrag;
@@ -27,8 +30,17 @@ public class MainActivity extends AppCompatActivity {
     private MealsFrag fragMeals;
     private CartFrag fragCart;
     private AccountFrag fragAcc;
+    private AccountMainPage fragMainPage;
 
-    private Fragment fragCurrent;
+    private static Fragment fragCurrent;
+
+    public static Fragment getFragCurrent(){
+        return fragCurrent;
+    }
+
+    public static void setFragCurrent(Fragment frag){
+        fragCurrent = frag;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +73,10 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (fragLand == null)
-                {
-                    fragLand = new LandingPageFrag();
-                }
                 fm.beginTransaction().remove(fragCurrent).commit();
+
+                fragLand = new LandingPageFrag();
+
                 fragCurrent = fragLand;
                 fm.beginTransaction().add(R.id.frameLayout, fragLand).commit();
             }
@@ -74,11 +85,8 @@ public class MainActivity extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (fragRes == null)
-                {
-                    fragRes = new RestaurantsFrag();
-                }
                 fm.beginTransaction().remove(fragCurrent).commit();
+                fragRes = new RestaurantsFrag();
                 fragCurrent = fragRes;
                 fm.beginTransaction().add(R.id.frameLayout, fragRes).commit();
             }
@@ -87,26 +95,27 @@ public class MainActivity extends AppCompatActivity {
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (fragCart == null)
+                if (AccountFrag.returnDetails() != null)
                 {
+                    fm.beginTransaction().remove(fragCurrent).commit();
                     fragCart = new CartFrag();
+                    fragCurrent = fragCart;
+                    fm.beginTransaction().add(R.id.frameLayout, fragCart).commit();
                 }
-                fm.beginTransaction().remove(fragCurrent).commit();
-                fragCurrent = fragCart;
-                fm.beginTransaction().add(R.id.frameLayout, fragCart).commit();
+                else {
+                    Toast.makeText(view.getContext(), "Please make an account first", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (fragAcc == null)
-                {
-                    fragAcc = new AccountFrag();
-                }
                 fm.beginTransaction().remove(fragCurrent).commit();
+                fragAcc = new AccountFrag();
                 fragCurrent = fragAcc;
                 fm.beginTransaction().add(R.id.frameLayout, fragAcc).commit();
+
             }
         });
     }

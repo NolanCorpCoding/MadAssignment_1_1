@@ -16,7 +16,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:textSize="50dp"
         android:id="@+id/accTitle"
-        android:text="Create account"
+        android:text="Log In"
         />
 
     <TextView

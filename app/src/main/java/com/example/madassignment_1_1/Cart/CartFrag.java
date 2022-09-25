@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.madassignment_1_1.Account.AccountFrag;
+import com.example.madassignment_1_1.Account.UserAccount;
 import com.example.madassignment_1_1.CartMenuItem.CartMenuItem;
 import com.example.madassignment_1_1.Meals.Meals;
 import com.example.madassignment_1_1.Meals.MealsFrag;
@@ -44,10 +46,17 @@ public class CartFrag extends Fragment {
     private CartFrag thisFrag = this;
 
     private List<CartMenuItem> currentCartItems;
+    private int currentCartId;
+    private CartList cartList;
+    private Cart currCart;
 
     public CartFrag() {
         // Required empty public constructor
     }
+
+//    public CartFrag(List<CartMenuItem> currentCartItems){
+//        this.currentCartItems = currentCartItems;
+//    }
 
     /**
      * Use this factory method to create a new instance of
@@ -74,6 +83,15 @@ public class CartFrag extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+        currentCartId = AccountFrag.returnDetails().getCurrentCartId();
+        cartList = new CartList();
+        cartList.load(getContext());
+
+        currCart = cartList.getCart(currentCartId);
+
+        currentCartItems = currCart.getMenuItemList();
     }
 
     @Override

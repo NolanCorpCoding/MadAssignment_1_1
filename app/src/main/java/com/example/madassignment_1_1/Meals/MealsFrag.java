@@ -23,6 +23,7 @@ import com.example.madassignment_1_1.Cart.Cart;
 import com.example.madassignment_1_1.Cart.CartFrag;
 import com.example.madassignment_1_1.Cart.CartList;
 import com.example.madassignment_1_1.CartMenuItem.CartMenuItem;
+import com.example.madassignment_1_1.MainActivity;
 import com.example.madassignment_1_1.R;
 import com.example.madassignment_1_1.Restaurants.Restaurant;
 import com.example.madassignment_1_1.Restaurants.RestaurantList;
@@ -49,6 +50,8 @@ public class MealsFrag extends Fragment {
     private Button checkOutButton;
 
     private MealsFrag thisFrag;
+
+    private FragmentManager fm;
 
     private CartList cartList;
 
@@ -84,6 +87,9 @@ public class MealsFrag extends Fragment {
         }
 
         thisFrag = this;
+        MainActivity.setFragCurrent(thisFrag);
+
+        fm = getParentFragmentManager();
 
         cartList = new CartList();
         cartList.load(getContext());
@@ -99,7 +105,6 @@ public class MealsFrag extends Fragment {
 
 
         // Inflate the layout for this fragment
-        FragmentManager fm = getParentFragmentManager();
         View view = inflater.inflate(R.layout.fragment_food, container, false);
         checkOutButton = (Button) view.findViewById(R.id.checkOutButton);
         RecyclerView rv = view.findViewById(R.id.rvFood);
@@ -111,7 +116,7 @@ public class MealsFrag extends Fragment {
             @Override
             public void onClick(View view) {
                 fm.beginTransaction().remove(thisFrag).commit();
-                //fragCurrent = fragRes;
+                Log.d("debug Sam", thisFrag.toString());
 
                 fm.beginTransaction().add(R.id.frameLayout, new CartFrag()).commit();
             }

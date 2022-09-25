@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.madassignment_1_1.MainActivity;
 import com.example.madassignment_1_1.R;
 
 /**
@@ -25,6 +26,8 @@ public class PaidFrag extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private PaidFrag thisFrag;
 
     public PaidFrag() {
         // Required empty public constructor
@@ -55,6 +58,9 @@ public class PaidFrag extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        thisFrag = this;
+        MainActivity.setFragCurrent(thisFrag);
     }
 
     @Override

@@ -92,9 +92,19 @@ public class AccountFrag extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        Fragment childFragment = new AccountCreateFrag();
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.subMenu_frag_container, childFragment).commit();
+        if (returnDetails() == null)
+        {
+            Fragment childFragment = new AccountCreateFrag();
+            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+            transaction.replace(R.id.subMenu_frag_container, childFragment).commit();
+        }
+        else
+        {
+            Fragment childFragment = new AccountMainPage();
+            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+            transaction.replace(R.id.subMenu_frag_container, childFragment).commit();
+        }
+
     }
 
     @Override
