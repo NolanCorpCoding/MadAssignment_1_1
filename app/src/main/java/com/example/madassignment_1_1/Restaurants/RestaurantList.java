@@ -56,7 +56,16 @@ public class RestaurantList {
         allRestaurants.add(new Restaurant(1, "Dominos", "410/412 Albany Hwy, Victoria Park WA 6100", R.drawable.dominos));
         allRestaurants.add(new Restaurant(2, "KFC", "252 Abernethy Rd, Belmont WA 6104", R.drawable.kfc));
         allRestaurants.add(new Restaurant(3, "McDonalds", "224 Manning Rd, Karawara WA 6152", R.drawable.maccas));
-        allRestaurants.add(new Restaurant(3, "FAKE McDonalds", "FAKE 224 Manning Rd, Karawara WA 6152", R.drawable.maccas));
+        //allRestaurants.add(new Restaurant(3, "FAKE McDonalds", "FAKE 224 Manning Rd, Karawara WA 6152", R.drawable.maccas));
+        allRestaurants.add(new Restaurant(4, "Five Guys", "321 Steward St, Mandurah WA 6293", R.drawable.fiveguys));
+        allRestaurants.add(new Restaurant(5, "Grill'd", "912 Langely Ct, West Perth, WA 6001", R.drawable.grilld));
+        allRestaurants.add(new Restaurant(6, "Hungry Jacks", "12 Stirling Hwy, Claremont 6010", R.drawable.jacks));
+        allRestaurants.add(new Restaurant(7, "Mad Mex", "51 Samuel St, Rockingham 6233", R.drawable.madmex));
+        allRestaurants.add(new Restaurant(8, "Nandos", "756 Tobey Rd, Nedlands 6009", R.drawable.nandos));
+        allRestaurants.add(new Restaurant(9, "Pizza Hut", "123 West Coast Blvd, Fremantle 6024", R.drawable.pizzahut));
+        allRestaurants.add(new Restaurant(10, "Subway", "512 Stone Rd, Mundaring 6723", R.drawable.subway));
+        allRestaurants.add(new Restaurant(11, "Taco Bell", "41 Bronze St, Northbridge 6000", R.drawable.tacobell));
+        allRestaurants.add(new Restaurant(12, "Zambrero", "83 Subaru St, Osborne Park 6090", R.drawable.zamb));
 
     }
 

@@ -21,7 +21,6 @@ public class MealsList {
 
     public void load(Context context)
     {
-        Log.d("debug Sam", "loading MealsList start");
         currMeals = new ArrayList<>();
         allMeals = new ArrayList<>();
 
@@ -38,16 +37,28 @@ public class MealsList {
 
         checkNewMeals();
 
-        Log.d("DEBUG", "MEALS...");
-        for(Meals meal : currMeals)
-        {
-            Log.d("DEBUG", "MEAL: id:" + meal.getId() + " name:" + meal.getName() + " price:" + meal.getPrice() + " restaurantid:" + meal.getRestaurantId());
-        }
+        //Log.d("DEBUG", "MEALS...");
+//        for(Meals meal : currMeals)
+//        {
+//            Log.d("DEBUG", "MEAL: id:" + meal.getId() + " name:" + meal.getName() + " price:" + meal.getPrice() + " restaurantid:" + meal.getRestaurantId());
+//        }
 
     }
 
     public MealsList(Context pContext) {
         load(pContext);
+    }
+
+    public List<Meals> getRestaurantMeals(int resID) {
+        List<Meals> resMeals = new ArrayList<>();
+        for (Meals meals : currMeals){
+            //Log.d("lmao", "Got meal " + meals.getName());
+            if (meals.getRestaurantId() == resID){
+                Log.d("testing123", "Got meal " + meals.getRestaurantId() + " vs id " + resID);
+                resMeals.add(meals);
+            }
+        }
+        return resMeals;
     }
 
     public Meals get(int i)
@@ -66,7 +77,7 @@ public class MealsList {
 
         List<Meals> list = new ArrayList<>();
 
-        int numElements = 3;
+        int numElements = 12;
 
         for (int i = 0; i < numElements; i++)
         {
