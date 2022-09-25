@@ -97,7 +97,7 @@ public class Cart {
             tempTotal = tempTotal + tempCalc;
         }
 
-        totalPrice = Math.round(100*tempTotal)/100;
+        totalPrice = Math.round(100.0*tempTotal)/100.0;
     }
 
 
