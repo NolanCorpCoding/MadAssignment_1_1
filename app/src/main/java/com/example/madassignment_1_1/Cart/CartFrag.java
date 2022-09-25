@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.madassignment_1_1.Account.AccountFrag;
 import com.example.madassignment_1_1.Account.UserAccount;
 import com.example.madassignment_1_1.CartMenuItem.CartMenuItem;
+import com.example.madassignment_1_1.MainActivity;
 import com.example.madassignment_1_1.Meals.Meals;
 import com.example.madassignment_1_1.Meals.MealsFrag;
 import com.example.madassignment_1_1.Meals.MealsList;
@@ -46,7 +47,7 @@ public class CartFrag extends Fragment {
     private String mParam2;
 
     private Button checkOutButton;
-    private CartFrag thisFrag = this;
+    private CartFrag thisFrag;
 
     private List<CartMenuItem> currentCartItems;
     private int currentCartId;
@@ -93,6 +94,9 @@ public class CartFrag extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        thisFrag = this;
+        MainActivity.setFragCurrent(thisFrag);
 
 
         currentCartId = AccountFrag.returnDetails().getCurrentCartId();

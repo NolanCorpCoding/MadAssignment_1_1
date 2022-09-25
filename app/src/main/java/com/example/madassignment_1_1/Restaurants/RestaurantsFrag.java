@@ -130,8 +130,8 @@ public class RestaurantsFrag extends Fragment {
             holder.img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "clicked menu item", Toast.LENGTH_SHORT).show(); //doesnt work
                     //THIS IS WHERE THE "ACTION" HAPPENS
+                    MealsFrag.setCurrRestaurantID(restaurant.getId());
                     fm.beginTransaction().remove(thisFrag).commit();
                     fm.beginTransaction().add(R.id.frameLayout, new MealsFrag()).commit();
                 }

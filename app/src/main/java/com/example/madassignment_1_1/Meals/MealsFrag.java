@@ -29,6 +29,8 @@ import com.example.madassignment_1_1.Restaurants.Restaurant;
 import com.example.madassignment_1_1.Restaurants.RestaurantList;
 import com.example.madassignment_1_1.Restaurants.RestaurantsFrag;
 
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MealsFrag#newInstance} factory method to
@@ -47,6 +49,8 @@ public class MealsFrag extends Fragment {
 
     private MealsList mealsList;
 
+    private List<Meals> resMealsList;
+
     private Button checkOutButton;
 
     private MealsFrag thisFrag;
@@ -54,6 +58,17 @@ public class MealsFrag extends Fragment {
     private FragmentManager fm;
 
     private CartList cartList;
+
+    private static int currRestaurantID;
+
+    public static int getCurrRestaurantID() {
+        return currRestaurantID;
+    }
+
+    public static void setCurrRestaurantID(int currRestaurantID) {
+        MealsFrag.currRestaurantID = currRestaurantID;
+    }
+
 
 
     public MealsFrag() {
@@ -97,6 +112,9 @@ public class MealsFrag extends Fragment {
         mealsList = new MealsList(getContext());
         mealsList.load(getContext());
 
+        resMealsList = mealsList.getRestaurantMeals(getCurrRestaurantID());
+        Log.d("lmao", "resMealList length is " + resMealsList.size());
+
     }
 
     @Override
@@ -109,7 +127,7 @@ public class MealsFrag extends Fragment {
         checkOutButton = (Button) view.findViewById(R.id.checkOutButton);
         RecyclerView rv = view.findViewById(R.id.rvFood);
         rv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        MealsFrag.MealAdapter adapter = new MealsFrag.MealAdapter(mealsList);
+        MealsFrag.MealAdapter adapter = new MealsFrag.MealAdapter(resMealsList);
         rv.setAdapter(adapter);
 
         checkOutButton.setOnClickListener(new View.OnClickListener() {
@@ -160,9 +178,9 @@ public class MealsFrag extends Fragment {
 
     public class MealAdapter extends RecyclerView.Adapter<MealsFrag.MealViewHolder> {
 
-        MealsList data;
+        List<Meals> data;
 
-        public MealAdapter(MealsList data){
+        public MealAdapter(List<Meals> data){
             this.data = data;
         }
 
@@ -191,7 +209,7 @@ public class MealsFrag extends Fragment {
 //                    //THIS IS WHERE THE "ACTION" HAPPENS
 //                }
 //            });
-            Meals meal = mealsList.get(position);
+            Meals meal = data.get(position);
             holder.mealName.setText(meal.getName());
             holder.mealPrice.setText(String.valueOf(meal.getPrice()));
             holder.img.setImageResource(meal.getDrawableId());

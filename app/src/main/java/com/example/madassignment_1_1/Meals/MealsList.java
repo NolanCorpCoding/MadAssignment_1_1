@@ -21,7 +21,6 @@ public class MealsList {
 
     public void load(Context context)
     {
-        Log.d("debug Sam", "loading MealsList start");
         currMeals = new ArrayList<>();
         allMeals = new ArrayList<>();
 
@@ -38,16 +37,33 @@ public class MealsList {
 
         checkNewMeals();
 
-        Log.d("DEBUG", "MEALS...");
-        for(Meals meal : currMeals)
-        {
-            Log.d("DEBUG", "MEAL: id:" + meal.getId() + " name:" + meal.getName() + " price:" + meal.getPrice() + " restaurantid:" + meal.getRestaurantId());
-        }
+        //Log.d("DEBUG", "MEALS...");
+//        for(Meals meal : currMeals)
+//        {
+//            Log.d("DEBUG", "MEAL: id:" + meal.getId() + " name:" + meal.getName() + " price:" + meal.getPrice() + " restaurantid:" + meal.getRestaurantId());
+//        }
 
     }
 
     public MealsList(Context pContext) {
         load(pContext);
+    }
+
+    public List<Meals> getRestaurantMeals(int resID) {
+        List<Meals> resMeals = new ArrayList<>();
+
+        Log.d("lmao", "Num of meals: " + currMeals.size());
+
+
+        for (Meals meals : currMeals){
+
+            if (meals.getRestaurantId() == resID){
+                Log.d("lmao", "Got restaurant " + meals.getRestaurantId() + " with the name " + meals.getName() + " vs the restaurant comparing " + resID);
+                resMeals.add(meals);
+            }
+        }
+
+        return resMeals;
     }
 
     public Meals get(int i)
@@ -66,11 +82,12 @@ public class MealsList {
 
         List<Meals> list = new ArrayList<>();
 
-        int numElements = 3;
+        int numElements = 12;
+        int randomLimit = currMeals.size() -1;
 
         for (int i = 0; i < numElements; i++)
         {
-            list.add(allMeals.get(randomGenerator.nextInt(numElements)));
+            list.add(currMeals.get(randomGenerator.nextInt(randomLimit)));
         }
         return list;
     }
