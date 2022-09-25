@@ -22,6 +22,7 @@ import com.example.madassignment_1_1.Cart.Cart;
 import com.example.madassignment_1_1.Cart.CartFrag;
 import com.example.madassignment_1_1.Cart.CartList;
 import com.example.madassignment_1_1.CartMenuItem.CartMenuItem;
+import com.example.madassignment_1_1.MainActivity;
 import com.example.madassignment_1_1.Meals.Meals;
 import com.example.madassignment_1_1.Meals.MealsFrag;
 import com.example.madassignment_1_1.Meals.MealsList;
