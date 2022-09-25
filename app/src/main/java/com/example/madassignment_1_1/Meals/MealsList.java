@@ -51,13 +51,18 @@ public class MealsList {
 
     public List<Meals> getRestaurantMeals(int resID) {
         List<Meals> resMeals = new ArrayList<>();
+
+        Log.d("lmao", "Num of meals: " + currMeals.size());
+
+
         for (Meals meals : currMeals){
-            //Log.d("lmao", "Got meal " + meals.getName());
+
             if (meals.getRestaurantId() == resID){
-                Log.d("testing123", "Got meal " + meals.getRestaurantId() + " vs id " + resID);
+                Log.d("lmao", "Got restaurant " + meals.getRestaurantId() + " with the name " + meals.getName() + " vs the restaurant comparing " + resID);
                 resMeals.add(meals);
             }
         }
+
         return resMeals;
     }
 

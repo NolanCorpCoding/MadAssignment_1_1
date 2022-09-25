@@ -61,7 +61,6 @@ public class MealsFrag extends Fragment {
 
     private static int currRestaurantID;
 
-
     public static int getCurrRestaurantID() {
         return currRestaurantID;
     }
@@ -114,6 +113,7 @@ public class MealsFrag extends Fragment {
         mealsList.load(getContext());
 
         resMealsList = mealsList.getRestaurantMeals(getCurrRestaurantID());
+        Log.d("lmao", "resMealList length is " + resMealsList.size());
 
     }
 
@@ -203,7 +203,7 @@ public class MealsFrag extends Fragment {
 //                    //THIS IS WHERE THE "ACTION" HAPPENS
 //                }
 //            });
-            Meals meal = mealsList.get(position);
+            Meals meal = data.get(position);
             holder.mealName.setText(meal.getName());
             holder.mealPrice.setText(String.valueOf(meal.getPrice()));
             holder.img.setImageResource(meal.getDrawableId());
